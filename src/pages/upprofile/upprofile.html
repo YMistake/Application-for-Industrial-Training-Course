@@ -1,0 +1,95 @@
+<!--
+  Generated template for the Upprofile page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Update Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>Academic Year</ion-label>
+      <ion-select>
+        <ion-option value="2559" selected="true">2559</ion-option>
+        <ion-option value="2558">2558</ion-option>
+        <ion-option value="2557">2557</ion-option>
+        <ion-option value="2556">2556</ion-option>
+      </ion-select>
+    </ion-item>
+    <div style="height: 20px"></div>
+    <ion-item>
+      <ion-label>Major</ion-label>
+      <ion-select placeholder="select">
+        <ion-option value="electronic">Electronic</ion-option>
+        <ion-option value="telecom">Telecommunication</ion-option>
+        <ion-option value="computer">Computer</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Student's Position</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Student's Tel.</ion-label>
+      <ion-input type="tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Student's Facbook</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Student's Line</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Company's Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Company's Address</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Company's Tel.</ion-label>
+      <ion-input type="tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Supervisor's Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Supervisor's Position</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Supervisor's Tel.</ion-label>
+      <ion-input type="tel"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div style="height: 20px"></div>
+  <img [src] = "temp">
+  <div style="height: 20px"></div>
+
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-50>
+        <button ion-button outline block (click)="getPicture()">Upload</button>
+      </ion-col>
+      <ion-col width-50>
+        <button ion-button block (click)="presentToast()">Submit</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

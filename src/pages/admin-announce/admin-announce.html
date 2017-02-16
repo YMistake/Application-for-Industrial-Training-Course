@@ -1,0 +1,47 @@
+<!--
+  Generated template for the AdminAnnounce page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Announcement</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <!--ส่วนประกาศข่าว-->
+  <ion-item>
+    <ion-label floating>Insert announcement in this field</ion-label>
+    <ion-textarea elastic></ion-textarea>
+  </ion-item>
+
+  <!--ส่วนเลือกผู้รับข่าว-->
+  <div style="height: 20px"></div>
+  <h6 margin-top padding-left>กรุณาเลือกผู้รับข่าวสาร</h6>
+  <ion-item>
+    <ion-label>Student</ion-label>
+    <ion-checkbox color="dark" checked="true"></ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <ion-label>Teacher</ion-label>
+    <ion-checkbox color="dark"></ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <ion-label>Company</ion-label>
+    <ion-checkbox color="dark"></ion-checkbox>
+  </ion-item>
+
+  <div style="height: 40px"></div>
+
+  <div padding-left padding-right>
+    <button ion-button block (click)="presentToast()">Submit</button>
+  </div>
+</ion-content>
