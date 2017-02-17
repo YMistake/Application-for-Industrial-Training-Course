@@ -7,6 +7,7 @@ import { FgpassPage } from '../fgpass/fgpass';
 import { ChpassPage } from '../chpass/chpass';
 import { TabPage } from '../tab/tab';
 
+
 /*
   Generated class for the Login page.
 
@@ -19,25 +20,23 @@ import { TabPage } from '../tab/tab';
 })
 export class LoginPage {
   @ViewChild(Nav) nav: Nav;
-  public items:any;
+  items:any;
   signupPage = SignupPage;
   fgpPage = FgpassPage;
   chpPage = ChpassPage;
   img = "assets/image/KMITL.png";
+  hostname: string;
   testUser = {username: undefined, password: undefined, role: "student"}; //แก้ undefined ด้วย
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public http: Http) {
     this.http = http;
-        this.http.get("http://192.168.0.104:3000/")
-            .subscribe(data =>{
-            //ทดลองการแสดงผลการตอบกลับของเซิร์ฟเวอร์
-            let alert = this.alertCtrl.create({title: data['_body']});
-            alert.present();
-            //รูปแบบ JSON
-            //this.items = JSON.parse(data['_body']);//Bind data to items object
-            },error=>{
-                console.log(error);// Error getting the data
-            } );
+    this.http.get("assets/server.json")
+        .subscribe(data =>{
+        this.items = JSON.parse(data['_body']);//get ip from server.json
+        this.hostname = this.items.ip; //put ip into hostname
+        },error=>{
+            console.log(error);// Error getting the data
+        } );
   }
 
   @Input() username;
@@ -47,7 +46,8 @@ export class LoginPage {
     console.log(user);
     console.log(pass);
     if(user == this.testUser.username && pass == this.testUser.password){
-      console.log("login successfull")
+      console.log("login successfull");
+      console.log(this.hostname);
       this.navCtrl.setRoot(TabPage, {role: this.testUser.role});
     }
     else {
@@ -58,8 +58,6 @@ export class LoginPage {
       wrongpass.present();
     }
   }
-
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');

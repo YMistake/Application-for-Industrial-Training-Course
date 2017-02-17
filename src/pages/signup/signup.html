@@ -13,30 +13,30 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-input type="text" placeholder="Username"></ion-input>
+      <ion-input type="text" placeholder="Username" #userInput [(ngModel)]="username"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="password" placeholder="Password"></ion-input>
+      <ion-input type="password" placeholder="Password" #passInput [(ngModel)]="password"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="password" placeholder="Confirm Password"></ion-input>
+      <ion-input type="password" placeholder="Confirm Password" #pass2Input [(ngModel)]="password2"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="First Name"></ion-input>
+      <ion-input type="text" placeholder="First Name" #firstInput [(ngModel)]="firstname"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Last Name"></ion-input>
+      <ion-input type="text" placeholder="Last Name" #lastInput [(ngModel)]="lastname"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="email" placeholder="E-Mail"></ion-input>
+      <ion-input type="email" placeholder="E-Mail" #emailInput [(ngModel)]="email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="email" placeholder="Confirm E-Mail"></ion-input>
+      <ion-input type="email" placeholder="Confirm E-Mail" #email2Input [(ngModel)]="email2"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label style="margin-left: 4%">Role</ion-label>
-      <ion-select>
-        <ion-option value="student" selected="true">Student</ion-option>
+      <ion-select [(ngModel)]="role">
+        <ion-option value="student">Student</ion-option>
         <ion-option value="teacher">Teacher</ion-option>
         <ion-option value="company">Company</ion-option>
       </ion-select>
@@ -44,5 +44,7 @@
   </ion-list>
 
   <div style="height: 20px"></div>
-  <button ion-button block navPop>Sign Up</button>
+  <button ion-button block (click)="sendData()">Sign Up</button>
+
+  <!--button ion-button block navPop (click)="sendData($event,userInput.value,passInput.value,pass2Input.value,firstInput.value,lastInput.value,emailInput.value,email2Input.value,roleInput.value)">Sign Up</button-->
 </ion-content>
