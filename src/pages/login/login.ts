@@ -26,7 +26,7 @@ export class LoginPage {
   chpPage = ChpassPage;
   img = "assets/image/KMITL.png";
   hostname: string;
-  testUser = {username: undefined, password: undefined, role: "student"}; //แก้ undefined ด้วย
+  testUser = {username: undefined, password: undefined, role: "admin"}; //แก้ undefined ด้วย
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public http: Http) {
     this.http = http;

@@ -20,7 +20,7 @@
   <!--ส่วนประกาศข่าว-->
   <ion-item>
     <ion-label floating>Insert announcement in this field</ion-label>
-    <ion-textarea elastic></ion-textarea>
+    <ion-textarea elastic [(ngModel)]="announce"></ion-textarea>
   </ion-item>
 
   <!--ส่วนเลือกผู้รับข่าว-->
@@ -28,15 +28,15 @@
   <h6 margin-top padding-left>กรุณาเลือกผู้รับข่าวสาร</h6>
   <ion-item>
     <ion-label>Student</ion-label>
-    <ion-checkbox color="dark" checked="true"></ion-checkbox>
+    <ion-checkbox color="dark" checked="true" [(ngModel)]="student"></ion-checkbox>
   </ion-item>
   <ion-item>
     <ion-label>Teacher</ion-label>
-    <ion-checkbox color="dark"></ion-checkbox>
+    <ion-checkbox color="dark" [(ngModel)]="teacher"></ion-checkbox>
   </ion-item>
   <ion-item>
     <ion-label>Company</ion-label>
-    <ion-checkbox color="dark"></ion-checkbox>
+    <ion-checkbox color="dark" [(ngModel)]="company"></ion-checkbox>
   </ion-item>
 
   <div style="height: 40px"></div>

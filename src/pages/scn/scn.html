@@ -20,7 +20,7 @@
   <ion-list>
     <ion-item>
       <ion-label floating>Company's Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="CompanyName"></ion-input>
     </ion-item>
     <h6 padding>Student List</h6>
     <div [ngSwitch]="show">
@@ -50,7 +50,7 @@
       <ion-col width-50><button ion-button outline style="width: 100%" (click)="getPicture()">
         Upload
       </button></ion-col>
-      <ion-col width-50><button ion-button style="width: 100%">
+      <ion-col width-50><button ion-button style="width: 100%" (click)="sendData()">
         Submit
       </button></ion-col>
     </ion-row>

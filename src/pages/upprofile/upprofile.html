@@ -18,8 +18,8 @@
   <ion-list>
     <ion-item>
       <ion-label>Academic Year</ion-label>
-      <ion-select>
-        <ion-option value="2559" selected="true">2559</ion-option>
+      <ion-select [(ngModel)]="AcademicYear">
+        <ion-option value="2559">2559</ion-option>
         <ion-option value="2558">2558</ion-option>
         <ion-option value="2557">2557</ion-option>
         <ion-option value="2556">2556</ion-option>
@@ -28,7 +28,7 @@
     <div style="height: 20px"></div>
     <ion-item>
       <ion-label>Major</ion-label>
-      <ion-select placeholder="select">
+      <ion-select placeholder="select" [(ngModel)]="Major">
         <ion-option value="electronic">Electronic</ion-option>
         <ion-option value="telecom">Telecommunication</ion-option>
         <ion-option value="computer">Computer</ion-option>
@@ -36,43 +36,43 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Student's Position</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="SPosition"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Student's Tel.</ion-label>
-      <ion-input type="tel"></ion-input>
+      <ion-input type="tel" [(ngModel)]="STel"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Student's Facbook</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="SFacebook"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Student's Line</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="SLine"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Company's Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="CName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Company's Address</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="CAddress"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Company's Tel.</ion-label>
-      <ion-input type="tel"></ion-input>
+      <ion-input type="tel" [(ngModel)]="CTel"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Supervisor's Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="SpvName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Supervisor's Position</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="SpvPosition"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Supervisor's Tel.</ion-label>
-      <ion-input type="tel"></ion-input>
+      <ion-input type="tel" [(ngModel)]="SpvTel"></ion-input>
     </ion-item>
   </ion-list>
 

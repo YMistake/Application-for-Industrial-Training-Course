@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { Http, Headers } from '@angular/http';
 import { Camera } from 'ionic-native';
 /*
   Generated class for the Upprofile page.
@@ -13,8 +14,20 @@ import { Camera } from 'ionic-native';
 })
 export class UpprofilePage {
   upprofile = UpprofilePage;
+  items:any;
+  hostname:string;
   temp = "assets/image/DefaultProfile.png";
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public http: Http) {
+    this.http = http;
+    this.http.get("assets/server.json")
+        .subscribe(data =>{
+        this.items = JSON.parse(data['_body']);//get ip from server.json
+        this.hostname = this.items.ip; //put ip into hostname
+        },error=>{
+            console.log(error);// Error getting the data
+        } );
+
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UpprofilePage');
@@ -44,4 +57,36 @@ export class UpprofilePage {
   }
 
 
+  @Input() AcademicYear = 2559;
+  @Input() Major;
+  @Input() SPosition;
+  @Input() STel;
+  @Input() SFacebook;
+  @Input() SLine;
+  @Input() CName;
+  @Input() CAddress;
+  @Input() CTel;
+  @Input() SpvName;
+  @Input() SpvPosition;
+  @Input() SpvTel;
+
+  sendData(){
+    let AY = this.AcademicYear;
+    let MJ = this.Major;
+    let SP = this.SPosition;
+    let ST = this.STel;
+    let SF = this.SFacebook;
+    let SL = this.SLine;
+    let CN = this.CName;
+    let CA = this.CAddress;
+    let CT = this.CTel;
+    let SpvN = this.SpvName;
+    let SpvP = this.SpvPosition;
+    let SpvT = this.SpvTel;
+    let temp = this.temp;
+    let body = `AcademicYear=${AY}&Major=${MJ}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}&temp=${temp}`;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+//เพิ่มส่วนส่งข้อมูง http request
+  }
 }

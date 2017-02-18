@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
 import { Camera } from 'ionic-native';
-
+import { Http, Headers } from '@angular/http';
 /*
   Generated class for the Scn page.
 
@@ -13,11 +13,22 @@ import { Camera } from 'ionic-native';
   templateUrl: 'scn.html'
 })
 export class ScnPage {
+  items:any;
+  hostname:string;
   show: boolean = true;
   list=[];
   temp= "assets/image/Default.png";
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController) {
+    public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController,
+    public http: Http) {
+      this.http = http;
+      this.http.get("assets/server.json")
+          .subscribe(data =>{
+          this.items = JSON.parse(data['_body']);//get ip from server.json
+          this.hostname = this.items.ip; //put ip into hostname
+          },error=>{
+              console.log(error);// Error getting the data
+          } );
 
   }
 
@@ -192,4 +203,16 @@ export class ScnPage {
    actionSheet.present();
  }
 
+ @Input() CompanyName;
+ @Input() Image;
+ sendData(){
+   let CName = this.CompanyName;
+   let Img = this.Image;
+   let temp = this.temp;
+   let list = this.list;
+   let body = `companyname=${CName}&image=${Img}&temp=${temp}&list=${list}`;
+   let headers = new Headers();
+   headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+ }
 }

@@ -13,25 +13,25 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-input type="text" placeholder="Username" #userInput [(ngModel)]="username"></ion-input>
+      <ion-input type="text" placeholder="Username" [(ngModel)]="username"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="password" placeholder="Password" #passInput [(ngModel)]="password"></ion-input>
+      <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="password" placeholder="Confirm Password" #pass2Input [(ngModel)]="password2"></ion-input>
+      <ion-input type="password" placeholder="Confirm Password" [(ngModel)]="password2"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="First Name" #firstInput [(ngModel)]="firstname"></ion-input>
+      <ion-input type="text" placeholder="First Name" [(ngModel)]="firstname"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Last Name" #lastInput [(ngModel)]="lastname"></ion-input>
+      <ion-input type="text" placeholder="Last Name" [(ngModel)]="lastname"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="email" placeholder="E-Mail" #emailInput [(ngModel)]="email"></ion-input>
+      <ion-input type="email" placeholder="E-Mail" [(ngModel)]="email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="email" placeholder="Confirm E-Mail" #email2Input [(ngModel)]="email2"></ion-input>
+      <ion-input type="email" placeholder="Confirm E-Mail" [(ngModel)]="email2"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label style="margin-left: 4%">Role</ion-label>
@@ -44,7 +44,6 @@
   </ion-list>
 
   <div style="height: 20px"></div>
-  <button ion-button block (click)="sendData()">Sign Up</button>
+  <button ion-button block navPop (click)="sendData()">Sign Up</button>
 
-  <!--button ion-button block navPop (click)="sendData($event,userInput.value,passInput.value,pass2Input.value,firstInput.value,lastInput.value,emailInput.value,email2Input.value,roleInput.value)">Sign Up</button-->
 </ion-content>
