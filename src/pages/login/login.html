@@ -11,17 +11,17 @@
     <ion-list>
       <ion-item>
         <ion-label floating>Username</ion-label>
-        <ion-input type="text" #userInput [(ngModel)]="username" ></ion-input>
+        <ion-input type="text" [(ngModel)]="username" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type="password" #passInput [(ngModel)]="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
       </ion-item>
     </ion-list>
     <div style="height: 40px"></div>
 
     <div padding-left padding-right>
-      <button ion-button block (click)="login($event,userInput.value,passInput.value)">Login</button>
+      <button ion-button block (click)="login()">Login</button>
     </div>
 
     <p style="text-align: center">

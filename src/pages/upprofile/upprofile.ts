@@ -84,9 +84,14 @@ export class UpprofilePage {
     let SpvP = this.SpvPosition;
     let SpvT = this.SpvTel;
     let temp = this.temp;
-    let body = `AcademicYear=${AY}&Major=${MJ}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}&temp=${temp}`;
+    let body = `AcademicYear=${AY}&Major=${MJ}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-//เพิ่มส่วนส่งข้อมูง http request
+    this.http.post(this.hostname + 'updateprofile', body, {headers: headers})
+      .subscribe(
+        data => {
+
+        }
+      )
   }
 }

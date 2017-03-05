@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import { LoginPage } from '../login/login';
 /*
@@ -16,7 +16,7 @@ export class SignupPage {
   loginPage = LoginPage;
   items:any;
   hostname: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{
@@ -57,9 +57,21 @@ export class SignupPage {
     this.http.post(this.hostname + 'signup', body, {headers: headers})
       .subscribe(
         data => {
-
+            var report = JSON.parse(data['_body']).report;
+            console.log(report);
+            if (report == 0){
+              let alert = this.alertCtrl.create({
+                title: 'Signup Failed',
+                subTitle: 'That Username has been taken!',
+                buttons: ['OK']
+              });
+              alert.present();
+            } else {
+              this.navCtrl.pop();
+            }
         }
       )
+
   }
 
 }

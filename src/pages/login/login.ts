@@ -1,6 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NavController, NavParams, AlertController, Nav } from 'ionic-angular';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { HomePage } from '../home/home';
 import { SignupPage } from '../signup/signup';
 import { FgpassPage } from '../fgpass/fgpass';
@@ -26,7 +26,7 @@ export class LoginPage {
   chpPage = ChpassPage;
   img = "assets/image/KMITL.png";
   hostname: string;
-  testUser = {username: undefined, password: undefined, role: "admin"}; //แก้ undefined ด้วย
+  testUser = {username: undefined, password: undefined, role: "student"}; //แก้ undefined ด้วย
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public http: Http) {
     this.http = http;
@@ -41,22 +41,31 @@ export class LoginPage {
 
   @Input() username;
   @Input() password;
-  login(event,user,pass){
-    console.log(event);
-    console.log(user);
-    console.log(pass);
-    if(user == this.testUser.username && pass == this.testUser.password){
-      console.log("login successfull");
-      console.log(this.hostname);
+  login(){
+    let user = this.username;
+    let pass = this.password;
+    let body = `Username=${user}&Password=${pass}`;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    this.http.post(this.hostname + 'login', body, {headers: headers})
+      .subscribe(
+        data => {
+
+        }
+      )
+
+    // if(user == this.testUser.username && pass == this.testUser.password){ //แก้ในวงเล็บให้เช็คการตอบกลับจาก backend ถ้า true ให้เข้าได้ ถ้า false ให้ไปทำตรง else
+    //   console.log("login successfull");
+    //   this.navCtrl.setRoot(TabPage, {role: this.testUser.role});
+    // }
+    // else {
+    //   let wrongpass = this.alertCtrl.create({
+    //     subTitle: "Username or Password incorrect.",
+    //     buttons: ['OK']
+    //   })
+    //   wrongpass.present();
+    // }
       this.navCtrl.setRoot(TabPage, {role: this.testUser.role});
-    }
-    else {
-      let wrongpass = this.alertCtrl.create({
-        subTitle: "Username or Password incorrect.",
-        buttons: ['OK']
-      })
-      wrongpass.present();
-    }
   }
 
   ionViewDidLoad() {
