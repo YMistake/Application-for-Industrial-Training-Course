@@ -8,23 +8,23 @@
   <div style="text-align: center">
     <img [src] = "img" >
   </div>
-    <ion-list>
+    <!-- <ion-list>
       <ion-item>
         <ion-label floating>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="username" ></ion-input>
+        <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="password"></ion-input>
+        <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
       </ion-item>
     </ion-list>
-    <div style="height: 40px"></div>
+    <div style="height: 40px"></div> -->
 
     <div padding-left padding-right>
-      <button ion-button block (click)="login()">Login</button>
+      <button *ngIf="is_login==false" ion-button block (click)="login()">Login</button>
     </div>
 
-    <p style="text-align: center">
+    <!-- <p style="text-align: center">
       <a [navPush]="signupPage">Create Account</a>
     </p>
     <p style="text-align: center">
@@ -32,5 +32,5 @@
     </p>
     <p style="text-align: center">
       <a [navPush]="chpPage">Change Password</a>
-    </p>
+    </p> -->
 </ion-content>
