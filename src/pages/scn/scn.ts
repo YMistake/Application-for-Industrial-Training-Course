@@ -14,6 +14,7 @@ import { Http, Headers } from '@angular/http';
 })
 export class ScnPage {
   items:any;
+  id: any;
   hostname:string;
   show: boolean = true;
   list=[];
@@ -21,6 +22,7 @@ export class ScnPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController,
     public http: Http) {
+      this.id = navParams.get("id");
       this.http = http;
       this.http.get("assets/server.json")
           .subscribe(data =>{

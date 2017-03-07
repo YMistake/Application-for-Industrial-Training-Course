@@ -15,8 +15,9 @@ import { Camera } from 'ionic-native';
 export class UpprofilePage {
   upprofile = UpprofilePage;
   items:any;
+  id = this.navParams.get("id");
   hostname:string;
-  temp = "assets/image/DefaultProfile.png";
+  // temp = "assets/image/DefaultProfile.png";
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public http: Http, public alertCtrl: AlertController) {
     this.http = http;
     this.http.get("assets/server.json")
@@ -26,7 +27,6 @@ export class UpprofilePage {
         },error=>{
             console.log(error);// Error getting the data
         } );
-
   }
 
   ionViewDidLoad() {
@@ -41,20 +41,21 @@ export class UpprofilePage {
   });
   toast.present();
 }
-  getPicture() {
-    let options = {
-      destinationType   : Camera.DestinationType.DATA_URL,
-      sourceType        : Camera.PictureSourceType.PHOTOLIBRARY,
-      correctOrientation: true
-    };
 
-    Camera.getPicture(options).then((imageData) => {
-     let base64Image = "data:image/jpeg;base64," + imageData;
-     this.temp = base64Image;
-    }, (err) => {
-  });
-
-  }
+  // getPicture() {
+  //   let options = {
+  //     destinationType   : Camera.DestinationType.DATA_URL,
+  //     sourceType        : Camera.PictureSourceType.PHOTOLIBRARY,
+  //     correctOrientation: true
+  //   };
+  //
+  //   Camera.getPicture(options).then((imageData) => {
+  //    let base64Image = "data:image/jpeg;base64," + imageData;
+  //    this.temp = base64Image;
+  //   }, (err) => {
+  // });
+  //
+  // }
 
 
   @Input() AcademicYear = 2559;
@@ -83,7 +84,6 @@ export class UpprofilePage {
     let SpvN = this.SpvName;
     let SpvP = this.SpvPosition;
     let SpvT = this.SpvTel;
-    let temp = this.temp;
 
     if (MJ == null || MJ.trim()=="" ||
         SP == null || SP.trim()=="" ||
@@ -103,7 +103,7 @@ export class UpprofilePage {
       });
       alert.present();
     } else {
-      let body = `AcademicYear=${AY}&Major=${MJ}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}`;
+      let body = `id=${this.id}&AcademicYear=${AY}&Major=${MJ}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}`;
       let headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       this.http.post(this.hostname + 'updateprofile', body, {headers: headers})
@@ -112,8 +112,7 @@ export class UpprofilePage {
 
           }
         )
-
+        this.presentToast();
     }
-
   }
 }

@@ -14,6 +14,7 @@ import { Http, Headers } from '@angular/http';
 })
 export class ReviewPage {
   items:any;
+  userid:any;
   hostname:string;
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public http: Http) {
     this.http = http;
@@ -29,6 +30,8 @@ export class ReviewPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReviewPage');
+    this.userid = this.navParams.get("id");
+    console.log("after"+this.userid);
   }
 
   presentToast() {
@@ -49,9 +52,14 @@ export class ReviewPage {
     let climate = this.Climate;
     let travel = this.Travel;
     let eat = this.Eating;
-    let body = `rec=${rec}&climate=${climate}&travel=${travel}&eat=${eat}`;
+    let body = `id=${this.userid}&rec=${rec}&climate=${climate}&travel=${travel}&eat=${eat}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    this.http.post(this.hostname + 'review', body, {headers: headers})
+      .subscribe(
+        data => {
 
+        }
+      )
   }
 }

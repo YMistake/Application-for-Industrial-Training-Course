@@ -15,18 +15,16 @@ import { TabPage } from '../tab/tab';
 })
 export class SignupPage {
   id: any;
-  autoFirstname: string;
-  // autoLastname: string;
-  // autoEmail: string;
   loginPage = LoginPage;
   items:any;
   hostname: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
     this.id = navParams.get("id"); // รับ id มาจากหน้า login
     console.log(this.id);
-    // this.autoFirstname = navParams.get("firstname");
-    // this.autoLastname = navParams.get("lastname");
-    // this.autoEmail = navParams.get("email");
+    this.firstname = navParams.get("firstname");
+    this.lastname = navParams.get("lastname");
+    this.email = navParams.get("email");
+    this.email2 = navParams.get("email");
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{

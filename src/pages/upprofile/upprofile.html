@@ -76,13 +76,14 @@
     </ion-item>
   </ion-list>
 
-  <div style="height: 20px"></div>
+  <!-- <div style="height: 20px"></div>
   <img [src] = "temp">
-  <div style="height: 20px"></div>
+  <div style="height: 20px"></div> -->
 
 </ion-content>
-<ion-footer>
-  <ion-grid>
+<ion-footer padding>
+  <button ion-button block (click)="sendData()">Submit</button>
+  <!-- <ion-grid>
     <ion-row>
       <ion-col width-50>
         <button ion-button outline block (click)="getPicture()">Upload</button>
@@ -91,5 +92,5 @@
         <button ion-button block (click)="presentToast();sendData()">Submit</button>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 </ion-footer>

@@ -23,12 +23,8 @@ declare var window: any;
 export class LoginPage {
   is_login = false;
   user = [];
-  id: any;
-  firstname: string;
-  lastname: string;
-  email: string;
-
-
+  userid: any;
+  role: string;
   @ViewChild(Nav) nav: Nav;
   items:any; // ใช้เก็บ Json
   // signupPage = SignupPage; // เก็บหน้าลิงค์
@@ -87,25 +83,22 @@ export class LoginPage {
               this.http.get("https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token="+data.access_token).map(res => res.json()).subscribe(result => {
                   console.log(result)
                   this.user=result;
-                  this.id = result.id;
-                  this.firstname = result.given_name;
-                  this.lastname = result.family_name;
-                  this.email = result.email;
-                  // this.is_login=true;
-                  console.log(this.id);
-                  
-                  let body = `id=${this.id}`;
+                  this.userid = result.id;
+                  console.log(this.userid);
+                  this.is_login=true;
+
+                  let body = `id=${this.userid}`;
                   let headers = new Headers();
                   headers.append('Content-Type', 'application/x-www-form-urlencoded');
                   this.http.post(this.hostname + 'login', body, {headers: headers})
                     .subscribe(
                       data => {
                         var report = JSON.parse(data['_body']).report;
+                        this.role = JSON.parse(data['_body']).Role;
                         if (report == 1){
-                          this.navCtrl.push(SignupPage, {id: this.id, firstname: this.firstname, lastname: this.lastname, email: this.email}); // เรียกหน้า signup พร้อมส่ง id ให้ไปด้วย
+                          this.navCtrl.push(SignupPage, {id: this.userid, firstname: result.given_name, lastname: result.family_name, email: result.email}); // เรียกหน้า signup พร้อมส่ง id ให้ไปด้วย
                         } else {
-                          // TODO เพิ่มการรับ Role มาจาก Backend เพื่อใช้เช็คบรรทัดด้านล่าง
-                          this.navCtrl.setRoot(TabPage, {role: this.firstname}); // ใส่ firstname ไว้ไม่ให้ error เฉยๆ
+                          this.navCtrl.setRoot(TabPage, {role: this.role, id: this.userid});
                         }
                       }
                     )
@@ -125,56 +118,12 @@ export class LoginPage {
       this.user = [];
   }
 
-
-
-  // @Input() username;
-  // @Input() password;
-  // login(){
-  //   let username = this.username;
-  //   let password = this.password;
-  //   let body = `Username=${username}&Password=${password}`;
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/x-www-form-urlencoded');
-  //   this.http.post(this.hostname + 'login', body, {headers: headers})
-  //     .subscribe(
-  //       data => {
-  //         var report = JSON.parse(data['_body']).report;
-  //         if (report == 0){
-  //           let alert = this.alertCtrl.create({
-  //             title: 'Login Failed',
-  //             subTitle: 'Usename Not Found!',
-  //             buttons: ['OK']
-  //           });
-  //           alert.present();
-  //         } else if (report == 1){
-  //           let alert = this.alertCtrl.create({
-  //             title: 'Login Failed',
-  //             subTitle: 'Wrong Password!',
-  //             buttons: ['OK']
-  //           });
-  //           alert.present();
-  //         } else {
-  //           this.navCtrl.setRoot(TabPage, {role: this.testUser.role});
-  //         }
-  //       }
-  //     )
-
-    // if(user == this.testUser.username && pass == this.testUser.password){ //แก้ในวงเล็บให้เช็คการตอบกลับจาก backend ถ้า true ให้เข้าได้ ถ้า false ให้ไปทำตรง else
-    //   console.log("login successfull");
-    //   this.navCtrl.setRoot(TabPage, {role: this.testUser.role});
-    // }
-    // else {
-    //   let wrongpass = this.alertCtrl.create({
-    //     subTitle: "Username or Password incorrect.",
-    //     buttons: ['OK']
-    //   })
-    //   wrongpass.present();
-    // }
-
-  // }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    //TODO เขียนเช็ค Token ถ้ามีอยู่ไม่ต้องขึ้นล็อกอิน
+    if (this.is_login == true){
+      this.navCtrl.setRoot(TabPage, {role: this.role, id: this.userid});
+    }
   }
 
 }
