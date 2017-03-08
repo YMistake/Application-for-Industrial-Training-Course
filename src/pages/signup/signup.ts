@@ -17,14 +17,17 @@ export class SignupPage {
   id: any;
   loginPage = LoginPage;
   items:any;
+  picture: any;
   hostname: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
     this.id = navParams.get("id"); // รับ id มาจากหน้า login
-    console.log(this.id);
+    console.log("In signup: "+this.id);
     this.firstname = navParams.get("firstname");
     this.lastname = navParams.get("lastname");
     this.email = navParams.get("email");
     this.email2 = navParams.get("email");
+    this.picture = navParams.get("picture");
+    console.log("In signup: "+this.picture);
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{
@@ -58,8 +61,10 @@ export class SignupPage {
     let email = this.email;
     let email2 = this.email2;
     let role = this.role;
+    let picture = this.picture;
     console.log(role);
     console.log(id);
+    console.log("picture when press submit: "+this.picture);
     // if (user == null || user.trim()=="" ||
     //     pass == null || pass.trim()=="" ||
     //     pass2 == null || pass2.trim()=="" ||
@@ -89,7 +94,7 @@ export class SignupPage {
       });
       alert.present();
     } else {
-      let body = `id=${id}&first=${first}&last=${last}&email=${email}&role=${role}`;
+      let body = `id=${id}&first=${first}&last=${last}&email=${email}&role=${role}&picture=${picture}`;
       let headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       this.http.post(this.hostname + 'signup', body, {headers: headers})

@@ -16,9 +16,9 @@ import { AcademicPage } from '../academic/academic';
 export class RecordPage {
 
   academic = AcademicPage;
-  items:any;
-  year:any;
-  hostname:string;
+  items: any;
+  year: any;
+  hostname: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     this.http = http;
@@ -26,17 +26,20 @@ export class RecordPage {
         .subscribe(data =>{
         this.items = JSON.parse(data['_body']);//get ip from server.json
         this.hostname = this.items.ip; //put ip into hostname
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        this.http.get(this.hostname + 'record',{headers: headers})
+          .subscribe(data =>{
+            this.year = JSON.parse(data['_body']).year;
+            console.log("year from record"+this.year);
+          });
         },error=>{
             console.log(error);// Error getting the data
         } );
-    this.http.get(this.hostname + 'record')
-      .subscribe(data =>{
-        this.year = JSON.parse(data['_body']);
-      });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecordPage');
   }
-
 }

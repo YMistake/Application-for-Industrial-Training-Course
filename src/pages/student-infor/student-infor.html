@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{studentName}}</ion-title>
+    <ion-title>{{firstname}} {{lastname}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,15 +15,15 @@
 
 <ion-content padding>
 
-  <img src="img/thumbnail-totoro.png"> <!--รูปโปรไฟล์-->
+  <img [src]="picture"> <!--รูปโปรไฟล์-->
 
   <h6>Company - {{company}}</h6>
   <h6>Position - {{position}}</h6>
-  <h6>Telephone - {{telephone}}</h6>
+  <h6>Telephone - {{tel}}</h6>
   <h6>Facebook - {{facebook}}</h6>
   <h6>Line - {{line}}</h6>
   <h6>Review</h6>
-  <p margin-left>- {{review1}}</p>
-  <p margin-left>- {{review2}}</p>
-  <p margin-left>- {{review3}}</p>
+  <p margin-left>บรรยากาศการทำงาน - {{climate}}</p>
+  <p margin-left>การเดินทางไปทำงาน - {{travel}}</p>
+  <p margin-left>การรับประทานอาหาร - {{eating}}</p>
 </ion-content>

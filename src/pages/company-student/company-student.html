@@ -15,13 +15,13 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of data">
+    <ion-item *ngFor="let item of student">
       <ion-thumbnail item-left>
-        <img src="img/thumbnail-totoro.png">
+        <img [src]="item.picture">
       </ion-thumbnail>
-      <h2>{{item.name}}</h2>
-      <p>{{item.rec}}</p>
-      <button ion-button clear item-right [navPush]="si" [navParams]=item.name>More</button>
+      <h2>{{item.Firstname}} {{item.Lastname}}</h2>
+      <p>{{item.Recommend}}</p>
+      <button ion-button clear item-right [navPush]="si" [navParams]=student>More</button>
     </ion-item>
   </ion-list>
 </ion-content>

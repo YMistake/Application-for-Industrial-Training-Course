@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Http, Headers } from '@angular/http';
 import { StudentInforPage } from '../student-infor/student-infor';
 /*
   Generated class for the CompanyStudent page.
@@ -14,20 +15,35 @@ import { StudentInforPage } from '../student-infor/student-infor';
 export class CompanyStudentPage {
   companyName: string;
   si = StudentInforPage;
-  data = [{
-    name: "ice",
-    rec: "recommend"
-  },{
-    name: "nu",
-    rec: "non recommend"
-  }];
+  items: any;
+  hostname: string;
+  student: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     this.companyName=navParams.data;
+    this.http = http;
+    this.http.get("assets/server.json")
+        .subscribe(data =>{
+        this.items = JSON.parse(data['_body']);//get ip from server.json
+        this.hostname = this.items.ip; //put ip into hostname
+
+        let body = `company=${this.companyName}`;
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        this.http.post(this.hostname + 'record/company/student',body,{headers: headers})
+          .subscribe(data =>{
+          this.student = JSON.parse(data['_body']).data;
+
+          console.log(this.student);
+          });
+        },error=>{
+            console.log(error);// Error getting the data
+        } );
+
   }
 
   ionViewDidLoad() {
-    console.log(this.navParams.data);
+    console.log('ionViewDidLoad CompanyStudentPage');
   }
 
 }

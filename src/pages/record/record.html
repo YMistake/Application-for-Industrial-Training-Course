@@ -19,8 +19,8 @@
 <ion-content>
   <h3 style="text-align: center" padding-top>Please select academic year</h3>
   <ion-list inset>
-    <button ion-item *ngFor="let item of year" [navPush]="academic" [navParams]=item>
-      {{ item }}
+    <button ion-item *ngFor="let item of year" [navPush]="academic" [navParams]=item.AcademicYear>
+      {{ item.AcademicYear }}
     </button>
   </ion-list>
 </ion-content>

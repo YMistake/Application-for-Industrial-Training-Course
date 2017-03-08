@@ -16,8 +16,8 @@
 <ion-content>
   <h3 style="text-align: center" padding-top>Company List</h3>
   <ion-list inset>
-    <button ion-item *ngFor="let item of items" [navPush]="cs" [navParams]=item>
-      {{ item }}
+    <button ion-item *ngFor="let item of company" [navPush]="cs" [navParams]=item.CName>
+      {{ item.CName }}
     </button>
   </ion-list>
 </ion-content>

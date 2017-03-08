@@ -25,6 +25,7 @@ export class LoginPage {
   user = [];
   userid: any;
   role: string;
+  picture: any;
   @ViewChild(Nav) nav: Nav;
   items:any; // ใช้เก็บ Json
   // signupPage = SignupPage; // เก็บหน้าลิงค์
@@ -84,10 +85,12 @@ export class LoginPage {
                   console.log(result)
                   this.user=result;
                   this.userid = result.id;
-                  console.log(this.userid);
+                  this.picture = result.picture;
+                  console.log("In login: "+this.picture);
+                  console.log("In login: "+this.userid);
                   this.is_login=true;
 
-                  let body = `id=${this.userid}`;
+                  let body = `id=${this.userid}&picture=${this.picture}`;
                   let headers = new Headers();
                   headers.append('Content-Type', 'application/x-www-form-urlencoded');
                   this.http.post(this.hostname + 'login', body, {headers: headers})
@@ -96,7 +99,7 @@ export class LoginPage {
                         var report = JSON.parse(data['_body']).report;
                         this.role = JSON.parse(data['_body']).Role;
                         if (report == 1){
-                          this.navCtrl.push(SignupPage, {id: this.userid, firstname: result.given_name, lastname: result.family_name, email: result.email}); // เรียกหน้า signup พร้อมส่ง id ให้ไปด้วย
+                          this.navCtrl.push(SignupPage, {id: result.id, firstname: result.given_name, lastname: result.family_name, email: result.email, picture: result.picture}); // เรียกหน้า signup พร้อมส่ง id ให้ไปด้วย
                         } else {
                           this.navCtrl.setRoot(TabPage, {role: this.role, id: this.userid});
                         }
