@@ -18,6 +18,7 @@ export class ScnPage {
   hostname:string;
   show: boolean = true;
   list=[];
+  errorMessage: string;
   temp= "assets/image/Default.png";
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController,
@@ -34,70 +35,154 @@ export class ScnPage {
 
   }
 
-  updateValue(){
-    if(this.list.length==0){
-      this.show=true
-    }
-    else{
-      this.show=false
-    }
+  @Input() CompanyName;
+  @Input() CompanyAddress;
+  @Input() CompanyTel;
+  sendData(){
+
+    let list = this.list;
+     let body = `id=${this.id}&CompanyName=${this.CompanyName}&CompanyAddress=${this.CompanyAddress}&CompanyTel=${this.CompanyTel}`;
+     let headers = new Headers();
+     headers.append('Content-Type', 'application/x-www-form-urlencoded');
+     for (let list of this.list){
+       body += `&list[]=${list.id}`;
+     }
+     this.http.post(this.hostname + 'sent-company', body, {headers: headers})
+       .subscribe(
+         data => {
+
+         },
+         error =>  this.errorMessage = <any>error
+       )
+      console.log(body);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ScnPage');
-    this.updateValue();
-  }
+ updateValue(){
+   if(this.list.length==0){
+     this.show=true
+   }
+   else{
+     this.show=false
+   }
+ }
 
-  showPrompt() {
-    let prompt = this.alertCtrl.create({
-      message: "Enter student's name that want to go to this company",
-      inputs: [
-        {
-          name: 'id',
-          placeholder: "Student ID",
-          type: 'tel'
-        },
-        {
-          name: 'name',
-          placeholder: "Student's Name",
-          type: 'text'
-        }
-      ],
+
+ showPrompt() {
+   let prompt = this.alertCtrl.create({
+     message: "Enter student's name that want to go to this company",
+     inputs: [
+       {
+         name: 'id',
+         placeholder: "Student ID",
+         type: 'tel'
+       },
+       {
+         name: 'name',
+         placeholder: "Student's Name",
+         type: 'text'
+       }
+     ],
+     buttons: [
+       {
+         text: 'Cancel',
+         handler: data => {
+           console.log('Cancel clicked');
+         }
+       },
+       {
+         text: 'Save',
+         handler: data => {
+           console.log('Saved clicked');
+           if(data.id.trim() != "" && data.name.trim() != ""){
+             this.list.push({id: data.id, name: data.name}); //เดี๋ยวต้องดึง Major จากเบสมาใส่ด้วย
+             this.updateValue();
+         }
+           console.log(this.list);
+         }
+       }
+     ]
+   });
+   prompt.present();
+ }
+
+ getPicture() {
+   let options = {
+     destinationType   : Camera.DestinationType.DATA_URL,
+     sourceType        : Camera.PictureSourceType.PHOTOLIBRARY,
+     correctOrientation: true
+   };
+
+   Camera.getPicture(options).then((imageData) => {
+    let base64Image = "data:image/jpeg;base64," + imageData;
+    this.temp = base64Image;
+   }, (err) => {
+ });
+ }
+
+
+  presentActionSheet(i) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Option',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Edit',
           handler: data => {
-            console.log('Cancel clicked');
+            this.edit(i);
           }
         },
         {
-          text: 'Save',
-          handler: data => {
-            console.log('Saved clicked');
-            if(data.id.trim() != "" && data.name.trim() != ""){
-              this.list.push({id: data.id, name: data.name}); //เดี๋ยวต้องดึง Major จากเบสมาใส่ด้วย
-              this.updateValue();
+          text: 'Delete',
+          handler: () => {
+            let remove = this.alertCtrl.create({
+              title: 'Delete your list?',
+              message: 'Do you want to delete your list?',
+              buttons: [
+                {
+                  text: 'No',
+                  handler: () => {
+                    console.log('No clicked');
+                  }
+                },
+                {
+                  text: 'Yes',
+                  handler: () => {
+                    this.list.splice(i,1);
+                    this.updateValue();
+                  }
+                }
+              ]
+            })
+            remove.present();
           }
-            console.log(this.list);
+        },
+        {
+          text: 'Clear',
+          handler: () => {
+            let clear = this.alertCtrl.create({
+              title: 'Clear your list?',
+              message: 'Do you want to clear your list?',
+              buttons: [
+                {
+                  text: 'No',
+                  handler: () => {
+                    console.log('No clicked');
+                  }
+                },
+                {
+                  text: 'Yes',
+                  handler: () => {
+                    this.list = [];
+                    this.updateValue();
+                  }
+                }
+              ]
+            })
+            clear.present();
           }
         }
       ]
     });
-    prompt.present();
-  }
-
-  getPicture() {
-    let options = {
-      destinationType   : Camera.DestinationType.DATA_URL,
-      sourceType        : Camera.PictureSourceType.PHOTOLIBRARY,
-      correctOrientation: true
-    };
-
-    Camera.getPicture(options).then((imageData) => {
-     let base64Image = "data:image/jpeg;base64," + imageData;
-     this.temp = base64Image;
-    }, (err) => {
-  });
+    actionSheet.present();
   }
 
   edit(i){
@@ -140,81 +225,9 @@ export class ScnPage {
     prompt.present();
   }
 
-  presentActionSheet(i) {
-   let actionSheet = this.actionSheetCtrl.create({
-     title: 'Option',
-     buttons: [
-       {
-         text: 'Edit',
-         handler: data => {
-           this.edit(i);
-         }
-       },
-       {
-         text: 'Delete',
-         handler: () => {
-           let remove = this.alertCtrl.create({
-             title: 'Delete your list?',
-             message: 'Do you want to delete your list?',
-             buttons: [
-               {
-                 text: 'No',
-                 handler: () => {
-                   console.log('No clicked');
-                 }
-               },
-               {
-                 text: 'Yes',
-                 handler: () => {
-                   this.list.splice(i,1);
-                   this.updateValue();
-                 }
-               }
-             ]
-           })
-           remove.present();
-         }
-       },
-       {
-         text: 'Clear',
-         handler: () => {
-           let clear = this.alertCtrl.create({
-             title: 'Clear your list?',
-             message: 'Do you want to clear your list?',
-             buttons: [
-               {
-                 text: 'No',
-                 handler: () => {
-                   console.log('No clicked');
-                 }
-               },
-               {
-                 text: 'Yes',
-                 handler: () => {
-                   this.list = [];
-                   this.updateValue();
-                 }
-               }
-             ]
-           })
-           clear.present();
-         }
-       }
-     ]
-   });
-   actionSheet.present();
- }
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ScnPage');
+    this.updateValue();
+  }
 
- @Input() CompanyName;
- @Input() Image;
- sendData(){
-   let CName = this.CompanyName;
-   let Img = this.Image;
-   let temp = this.temp;
-   let list = this.list;
-   let body = `companyname=${CName}&image=${Img}&temp=${temp}&list=${list}`;
-   let headers = new Headers();
-   headers.append('Content-Type', 'application/x-www-form-urlencoded');
-
- }
 }

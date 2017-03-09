@@ -60,6 +60,7 @@ export class UpprofilePage {
 
   @Input() AcademicYear = 2559;
   @Input() Major;
+  @Input() SId;
   @Input() SPosition;
   @Input() STel;
   @Input() SFacebook;
@@ -74,6 +75,7 @@ export class UpprofilePage {
   sendData(){
     let AY = this.AcademicYear;
     let MJ = this.Major;
+    let SI = this.SId;
     let SP = this.SPosition;
     let ST = this.STel;
     let SF = this.SFacebook;
@@ -86,6 +88,7 @@ export class UpprofilePage {
     let SpvT = this.SpvTel;
 
     if (MJ == null || MJ.trim()=="" ||
+        SI == null || SI.trim()=="" ||
         SP == null || SP.trim()=="" ||
         ST == null || ST.trim()=="" ||
         SF == null || SF.trim()=="" ||
@@ -103,7 +106,7 @@ export class UpprofilePage {
       });
       alert.present();
     } else {
-      let body = `id=${this.id}&AcademicYear=${AY}&Major=${MJ}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}`;
+      let body = `id=${this.id}&AcademicYear=${AY}&Major=${MJ}&SId=${SI}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}`;
       let headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       this.http.post(this.hostname + 'updateprofile', body, {headers: headers})

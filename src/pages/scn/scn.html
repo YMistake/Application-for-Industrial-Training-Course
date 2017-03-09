@@ -22,6 +22,14 @@
       <ion-label floating>Company's Name</ion-label>
       <ion-input type="text" [(ngModel)]="CompanyName"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label floating>Company's Address</ion-label>
+      <ion-input type="text" [(ngModel)]="CompanyAddress"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Company's Tel.</ion-label>
+      <ion-input type="tel" [(ngModel)]="CompanyTel"></ion-input>
+    </ion-item>
     <h6 padding>Student List</h6>
     <div [ngSwitch]="show">
       <div *ngSwitchCase="true">
