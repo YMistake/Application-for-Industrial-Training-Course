@@ -8,7 +8,6 @@ import { ReviewPage } from '../review/review';
 import { DownloadPage } from '../download/download';
 import { RecordPage } from '../record/record';
 
-
 /*
   Generated class for the Home page.
 
@@ -27,9 +26,12 @@ export class HomePage {
   pages: Array<{title: string, component: any}>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public app: App) {
-    this.Role = navParams.get('chkRole');
+    this.Role = localStorage.getItem("role");
     console.log(this.Role);
   }
+
+
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }

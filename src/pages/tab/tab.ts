@@ -9,6 +9,7 @@ import { UpprofilePage } from '../upprofile/upprofile';
 import { ReviewPage } from '../review/review';
 import { DownloadPage } from '../download/download';
 import { RecordPage } from '../record/record';
+import { LogoutPage } from '../logout/logout';
 
 import { TeaSpvsPage } from '../tea-spvs/tea-spvs';
 
@@ -32,20 +33,17 @@ export class TabPage {
   // rootPage: any = HomePage;
 
   chkRole: string;
-  userid: any;
   new: any;
 
   pages: Array<{title: string, component: any}>;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
   }
 
   ionViewDidLoad() {
-    this.userid = this.navParams.get("id");
-    console.log(this.userid);
-    this.chkRole = this.navParams.get("role");
+    // this.chkRole = this.navParams.get("role");
+    this.chkRole = localStorage.getItem("role");
     if(this.chkRole == "student"){
     this.pages = [
         { title: 'Home Page', component: HomePage},
@@ -54,21 +52,21 @@ export class TabPage {
         { title: 'Write a Review', component: ReviewPage},
         { title: 'Download', component: DownloadPage},
         { title: 'Industrial Training Record', component: RecordPage},
-        { title: 'Logout', component: LoginPage}
+        { title: 'Logout', component: LogoutPage}
       ];
     }
     else if(this.chkRole == "teacher"){
       this.pages = [
         { title: "Home", component: HomePage},
         { title: "Supervision", component: TeaSpvsPage},
-        { title: "Logout", component: LoginPage}
+        { title: "Logout", component: LogoutPage}
       ];
     }
     else if(this.chkRole == "company"){
       this.pages = [
         { title: "Home", component: HomePage},
         { title: "Student List", component: CpnStdlistPage},
-        { title: "Logout", component: LoginPage}
+        { title: "Logout", component: LogoutPage}
       ];
     }
     else if(this.chkRole == "admin"){
@@ -76,26 +74,24 @@ export class TabPage {
         { title: "Home", component: HomePage},
         { title: "Announcement", component: AdminAnnouncePage},
         { title: "Approve the company", component: AdminApprovePage},
-        { title: "Logout", component: LoginPage}
+        { title: "Logout", component: LogoutPage}
       ];
     }
-    console.log('ionViewDidLoad TabPage');
     this.loadHome();
   }
 
-
   loadHome(){
-    console.log("loadhome"+this.userid);
-    this.nav.setRoot(HomePage,{chkRole: this.chkRole});
+    this.nav.setRoot(HomePage);
+    console.log("Load Home Set root finish")
   }
 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.new = this.userid;
-    console.log("before"+this.userid);
-    console.log("new"+this.new);
-    this.nav.setRoot(page.component,{id: this.userid});
-
+    this.nav.setRoot(page.component);
+    this.ionViewDidLoad();
+    // this.pages = [
+    //   { title: "New", component: HomePage}
+    // ];
   }
 }

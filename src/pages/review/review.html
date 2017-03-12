@@ -34,7 +34,7 @@
     <h4 padding-left padding-top>รีวิวสถานที่ฝึกงาน</h4>
     <ion-item id="work-climate">
       <ion-label floating>บรรยากาศการทำงาน</ion-label>
-      <ion-textarea elastic [(ngModel)]="Climate"></ion-textarea>
+      <ion-textarea elastic [(ngModel)]="Work_Environment"></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label floating>การเดินทางไปทำงาน</ion-label>
@@ -42,10 +42,10 @@
     </ion-item>
     <ion-item>
       <ion-label floating>สถานที่รับประทานอาหาร</ion-label>
-      <ion-textarea elastic [(ngModel)]="Eating"></ion-textarea>
+      <ion-textarea elastic [(ngModel)]="Bistro"></ion-textarea>
     </ion-item>
   </ion-list>
   <div padding>
-    <button ion-button block (click)="sendData();presentToast();">Submit</button>
+    <button ion-button block (click)="sendData()">Submit</button>
   </div>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 
 /*
@@ -14,9 +14,10 @@ import { Http, Headers } from '@angular/http';
 })
 export class ReviewPage {
   items:any;
-  userid:any;
+  userdata:any;
   hostname:string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public http: Http,public alertCtrl: AlertController) {
+    this.userdata = JSON.parse(localStorage.getItem("userdata"));
     this.http = http;
     this.http.get("assets/server.json")
       .subscribe(data =>{
@@ -28,10 +29,9 @@ export class ReviewPage {
 
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     console.log('ionViewDidLoad ReviewPage');
-    this.userid = this.navParams.get("id");
-    console.log("after"+this.userid);
+    console.log("Id From ReviewPage : "+this.userdata.id);
   }
 
   presentToast() {
@@ -44,22 +44,39 @@ export class ReviewPage {
   }
 
   @Input() Recommend = "recommend";
-  @Input() Climate;
+  @Input() Work_Environment;
   @Input() Travel;
-  @Input() Eating;
+  @Input() Bistro;
   sendData(){
     let rec = this.Recommend;
-    let climate = this.Climate;
-    let travel = this.Travel;
-    let eat = this.Eating;
-    let body = `id=${this.userid}&rec=${rec}&climate=${climate}&travel=${travel}&eat=${eat}`;
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    this.http.post(this.hostname + 'review', body, {headers: headers})
-      .subscribe(
-        data => {
+    let Work_Environment = this.Work_Environment;
+    let Travel = this.Travel;
+    let Bistro = this.Bistro;
 
-        }
-      )
+    if (Work_Environment == null || Work_Environment.trim()=="" ||
+        Travel == null || Travel.trim()=="" ||
+        Bistro == null || Bistro.trim()=="") {
+      let alert = this.alertCtrl.create({
+        title: 'Submit Failed',
+        subTitle: 'please fill all required fields!',
+        buttons: ['OK']
+      });
+      alert.present();
+    } else {
+      let body = `id=${this.userdata.id}&rec=${rec}&Work_Environment=${Work_Environment}&Travel=${Travel}&Bistro=${Bistro}`;
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+      this.http.post(this.hostname + 'review', body, {headers: headers})
+        .subscribe(
+          data => {
+
+          }
+        )
+      this.presentToast();
+      this.Work_Environment = "";
+      this.Travel = "";
+      this.Bistro = "";
+    }
+
   }
 }

@@ -48,11 +48,9 @@
     <img [src] = "temp" padding>
 
 </ion-list>
-  <ion-fab bottom right>
+  <ion-fab bottom right style="padding-bottom: 45px;">
     <button ion-fab color="primary" (click)=showPrompt()><ion-icon name="add"></ion-icon></button>
   </ion-fab>
-</ion-content>
-<ion-footer>
   <ion-grid>
     <ion-row>
       <ion-col width-50><button ion-button outline style="width: 100%" (click)="getPicture()">
@@ -62,4 +60,5 @@
         Submit
       </button></ion-col>
     </ion-row>
-  </ion-grid></ion-footer>
+  </ion-grid>
+</ion-content>

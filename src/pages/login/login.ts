@@ -3,8 +3,7 @@ import { NavController, NavParams, AlertController, Nav } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import { HomePage } from '../home/home';
 import { SignupPage } from '../signup/signup';
-import { FgpassPage } from '../fgpass/fgpass';
-import { ChpassPage } from '../chpass/chpass';
+import { AdminPinPage } from '../admin-pin/admin-pin';
 import { TabPage } from '../tab/tab';
 import 'rxjs/add/operator/map';
 
@@ -22,10 +21,12 @@ declare var window: any;
 })
 export class LoginPage {
   is_login = false;
+  adminpage = AdminPinPage;
   user = [];
   userid: any;
   role: string;
   picture: any;
+  @Input() Role;
   @ViewChild(Nav) nav: Nav;
   items:any; // ใช้เก็บ Json
   // signupPage = SignupPage; // เก็บหน้าลิงค์
@@ -45,6 +46,23 @@ export class LoginPage {
             console.log(error);// Error getting the data
         } );
   }
+
+  checkLogin(){
+    if (this.Role == "user"){
+      this.login();
+    } else if (this.Role == "admin") {
+      this.navCtrl.push(AdminPinPage);
+    } else {
+      let alert = this.alertCtrl.create({
+        title: 'Warning!!!',
+        subTitle: 'Please select your role.',
+        buttons: ['OK']
+      });
+      alert.present();
+    }
+  }
+
+
 
   googleLogin() {
       return new Promise(function (resolve, reject) {
@@ -83,6 +101,8 @@ export class LoginPage {
 
               this.http.get("https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token="+data.access_token).map(res => res.json()).subscribe(result => {
                   console.log(result)
+                  localStorage.setItem("userdata",JSON.stringify(result));
+                  console.log(JSON.parse(localStorage.getItem("userdata")));
                   this.user=result;
                   this.userid = result.id;
                   this.picture = result.picture;
@@ -98,10 +118,12 @@ export class LoginPage {
                       data => {
                         var report = JSON.parse(data['_body']).report;
                         this.role = JSON.parse(data['_body']).Role;
+                        localStorage.setItem("role",this.role);
+                        console.log("Report = " + report);
                         if (report == 1){
                           this.navCtrl.push(SignupPage, {id: result.id, firstname: result.given_name, lastname: result.family_name, email: result.email, picture: result.picture}); // เรียกหน้า signup พร้อมส่ง id ให้ไปด้วย
                         } else {
-                          this.navCtrl.setRoot(TabPage, {role: this.role, id: this.userid});
+                          this.navCtrl.setRoot(TabPage);
                         }
                       }
                     )
@@ -121,12 +143,8 @@ export class LoginPage {
       this.user = [];
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-    //TODO เขียนเช็ค Token ถ้ามีอยู่ไม่ต้องขึ้นล็อกอิน
-    if (this.is_login == true){
-      this.navCtrl.setRoot(TabPage, {role: this.role, id: this.userid});
-    }
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter LoginPage');
   }
 
 }

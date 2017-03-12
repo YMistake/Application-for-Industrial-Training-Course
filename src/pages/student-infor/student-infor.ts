@@ -28,9 +28,9 @@ export class StudentInforPage {
   tel: string;
   facebook: string;
   line: string;
-  climate: any;
-  travel: any;
-  eating: any;
+  Work_Environment: any;
+  Travel: any;
+  Bistro: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     this.student=navParams.data;
@@ -56,9 +56,9 @@ export class StudentInforPage {
           this.tel = this.information[0].STel;
           this.facebook = this.information[0].SFacebook;
           this.line = this.information[0].SLine;
-          this.climate = this.information[0].Climate;
-          this.travel = this.information[0].Travel;
-          this.eating = this.information[0].Eating;
+          this.Work_Environment = this.information[0].Work_Environment;
+          this.Travel = this.information[0].Travel;
+          this.Bistro = this.information[0].Bistro;
           });
         },error=>{
             console.log(error);// Error getting the data

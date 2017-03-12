@@ -3,6 +3,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import { LoginPage } from '../login/login';
 import { TabPage } from '../tab/tab';
+import { SignupCompanyPage } from '../signup-company/signup-company';
 /*
   Generated class for the Signup page.
 
@@ -15,9 +16,9 @@ import { TabPage } from '../tab/tab';
 })
 export class SignupPage {
   id: any;
+  picture: any;
   loginPage = LoginPage;
   items:any;
-  picture: any;
   hostname: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
     this.id = navParams.get("id"); // รับ id มาจากหน้า login
@@ -52,9 +53,6 @@ export class SignupPage {
   @Input() role = "student";
 
   sendData(){
-    // let user = this.username;
-    // let pass = this.password;
-    // let pass2 = this.password2;
     let id = this.id;
     let first = this.firstname;
     let last = this.lastname;
@@ -64,10 +62,8 @@ export class SignupPage {
     let picture = this.picture;
     console.log(role);
     console.log(id);
-    console.log("picture when press submit: "+this.picture);
-    // if (user == null || user.trim()=="" ||
-    //     pass == null || pass.trim()=="" ||
-    //     pass2 == null || pass2.trim()=="" ||
+    console.log("picture when press submit: "+picture);
+
     if(
         first == null || first.trim()=="" ||
         last == null || last.trim()=="" ||
@@ -79,13 +75,6 @@ export class SignupPage {
         buttons: ['OK']
       });
       alert.present();
-    // }else if (pass != pass2){
-    //   let alert = this.alertCtrl.create({
-    //     title: 'Signup Failed',
-    //     subTitle: 'Password and confirm password does not match!',
-    //     buttons: ['OK']
-    //   });
-    //   alert.present();
     }else if (email != email2){
       let alert = this.alertCtrl.create({
         title: 'Signup Failed',
@@ -110,8 +99,13 @@ export class SignupPage {
                 });
                 alert.present();
               } else {
-                // this.navCtrl.pop();
-                this.navCtrl.setRoot(TabPage, {role: role});
+                if (this.role == "company"){
+                  localStorage.setItem("role",role);
+                  this.navCtrl.push(SignupCompanyPage, {id: id});
+                } else {
+                  localStorage.setItem("role",role);
+                  this.navCtrl.setRoot(TabPage);
+                }
               }
           }
         )

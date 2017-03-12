@@ -13,8 +13,6 @@ import { Elastic } from './elastic';
 import { AcademicPage } from '../pages/academic/academic';
 import { CompanyStudentPage } from '../pages/company-student/company-student';
 import { StudentInforPage } from '../pages/student-infor/student-infor';
-import { FgpassPage } from '../pages/fgpass/fgpass';
-import { ChpassPage } from '../pages/chpass/chpass';
 import { TabPage } from '../pages/tab/tab';
 import { TeaSpvsPage } from '../pages/tea-spvs/tea-spvs';
 import { TeaComPage } from '../pages/tea-com/tea-com';
@@ -24,6 +22,10 @@ import { CpnStdlistPage } from '../pages/cpn-stdlist/cpn-stdlist';
 import { AdminAnnouncePage } from '../pages/admin-announce/admin-announce';
 import { AdminApprovePage } from '../pages/admin-approve/admin-approve';
 import { AdminConfirmPage } from '../pages/admin-confirm/admin-confirm';
+import { AdminPinPage } from '../pages/admin-pin/admin-pin';
+import { LogoutPage } from '../pages/logout/logout';
+import { SignupCompanyPage } from '../pages/signup-company/signup-company';
+
 
 @NgModule({
   declarations: [
@@ -35,13 +37,12 @@ import { AdminConfirmPage } from '../pages/admin-confirm/admin-confirm';
     DownloadPage,
     RecordPage,
     LoginPage,
+    LogoutPage,
     SignupPage,
     Elastic,
     AcademicPage,
     CompanyStudentPage,
     StudentInforPage,
-    FgpassPage,
-    ChpassPage,
     TabPage,
     TeaSpvsPage,
     TeaComPage,
@@ -50,7 +51,9 @@ import { AdminConfirmPage } from '../pages/admin-confirm/admin-confirm';
     CpnStdlistPage,
     AdminAnnouncePage,
     AdminApprovePage,
-    AdminConfirmPage
+    AdminConfirmPage,
+    AdminPinPage,
+    SignupCompanyPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -65,12 +68,11 @@ import { AdminConfirmPage } from '../pages/admin-confirm/admin-confirm';
     DownloadPage,
     RecordPage,
     LoginPage,
+    LogoutPage,
     SignupPage,
     AcademicPage,
     CompanyStudentPage,
     StudentInforPage,
-    FgpassPage,
-    ChpassPage,
     TabPage,
     TeaSpvsPage,
     TeaComPage,
@@ -79,7 +81,9 @@ import { AdminConfirmPage } from '../pages/admin-confirm/admin-confirm';
     CpnStdlistPage,
     AdminAnnouncePage,
     AdminApprovePage,
-    AdminConfirmPage
+    AdminConfirmPage,
+    AdminPinPage,
+    SignupCompanyPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

@@ -15,10 +15,11 @@ import { Camera } from 'ionic-native';
 export class UpprofilePage {
   upprofile = UpprofilePage;
   items:any;
-  id = this.navParams.get("id");
+  userdata: any;
   hostname:string;
   // temp = "assets/image/DefaultProfile.png";
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public http: Http, public alertCtrl: AlertController) {
+    this.userdata = JSON.parse(localStorage.getItem("userdata"));
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{
@@ -106,7 +107,7 @@ export class UpprofilePage {
       });
       alert.present();
     } else {
-      let body = `id=${this.id}&AcademicYear=${AY}&Major=${MJ}&SId=${SI}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}`;
+      let body = `id=${this.userdata.id}&AcademicYear=${AY}&Major=${MJ}&SId=${SI}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}`;
       let headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       this.http.post(this.hostname + 'updateprofile', body, {headers: headers})
@@ -116,6 +117,17 @@ export class UpprofilePage {
           }
         )
         this.presentToast();
+        this.SId = "";
+        this.SPosition = "";
+        this.STel = "";
+        this.SFacebook = "";
+        this.SLine = "";
+        this.CName = "";
+        this.CAddress = "";
+        this.CTel = "";
+        this.SpvName = "";
+        this.SpvPosition = "";
+        this.SpvTel = "";
     }
   }
 }

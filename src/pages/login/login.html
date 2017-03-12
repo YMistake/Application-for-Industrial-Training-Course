@@ -5,6 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-content padding>
+  <div style="height: 10%"></div>
   <div style="text-align: center">
     <img [src] = "img" >
   </div>
@@ -18,11 +19,19 @@
         <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
       </ion-item>
     </ion-list>
-    <div style="height: 40px"></div> -->
-
-    <div padding-left padding-right>
-      <button ion-button block (click)="login()">Login</button>
-    </div>
+  -->
+  <div style="height: 10%"></div>
+  <ion-item>
+    <ion-label>Role</ion-label>
+    <ion-select [(ngModel)]="Role">
+      <ion-option value="user">User</ion-option>
+      <ion-option value="admin">Admin</ion-option>
+    </ion-select>
+  </ion-item>
+  <div style="height: 10%"></div>
+  <div padding-left padding-right>
+    <button ion-button block (click)="checkLogin()">Login</button>
+  </div>
 
     <!-- <p style="text-align: center">
       <a [navPush]="signupPage">Create Account</a>

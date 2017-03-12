@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { NavController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
-import { Camera } from 'ionic-native';
+import { NavController, NavParams, AlertController, ActionSheetController, ToastController, Platform, LoadingController, Loading  } from 'ionic-angular';
+import { Camera, File, Transfer, FilePath } from 'ionic-native';
 import { Http, Headers } from '@angular/http';
 /*
   Generated class for the Scn page.
@@ -14,16 +14,17 @@ import { Http, Headers } from '@angular/http';
 })
 export class ScnPage {
   items:any;
-  id: any;
+  userdata: any;
   hostname:string;
   show: boolean = true;
   list=[];
   errorMessage: string;
   temp= "assets/image/Default.png";
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, public actionSheetCtrl: ActionSheetController,
-    public http: Http) {
-      this.id = navParams.get("id");
+    public http: Http, private toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController) {
+      this.userdata = JSON.parse(localStorage.getItem("userdata"));
       this.http = http;
       this.http.get("assets/server.json")
           .subscribe(data =>{
@@ -32,29 +33,54 @@ export class ScnPage {
           },error=>{
               console.log(error);// Error getting the data
           } );
+  }
 
+  presentToast(text) {
+  let toast = this.toastCtrl.create({
+    message: text,
+    duration: 3000,
+    position: 'bottom'
+  });
+  toast.present();
   }
 
   @Input() CompanyName;
   @Input() CompanyAddress;
   @Input() CompanyTel;
   sendData(){
-
     let list = this.list;
-     let body = `id=${this.id}&CompanyName=${this.CompanyName}&CompanyAddress=${this.CompanyAddress}&CompanyTel=${this.CompanyTel}`;
-     let headers = new Headers();
-     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-     for (let list of this.list){
-       body += `&list[]=${list.id}`;
-     }
-     this.http.post(this.hostname + 'sent-company', body, {headers: headers})
-       .subscribe(
-         data => {
+    if( list == null || list.length == 0 ||
+        this.CompanyName == null || this.CompanyName.trim()=="" ||
+        this.CompanyAddress == null || this.CompanyAddress.trim()=="" ||
+        this.CompanyTel == null || this.CompanyTel.trim()==""){
+          let alert = this.alertCtrl.create({
+            title: 'Submit Failed',
+            subTitle: 'please fill all required fields!',
+            buttons: ['OK']
+          });
+          alert.present();
+        } else {
+          let body = `id=${this.userdata.id}&CompanyName=${this.CompanyName}&CompanyAddress=${this.CompanyAddress}&CompanyTel=${this.CompanyTel}`;
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          for (let list of this.list){
+            body += `&list[]=${list.id}`;
+          }
+          this.http.post(this.hostname + 'sent-company', body, {headers: headers})
+            .subscribe(
+              data => {
 
-         },
-         error =>  this.errorMessage = <any>error
-       )
-      console.log(body);
+              },
+              error =>  this.errorMessage = <any>error
+            )
+            console.log(body);
+            this.presentToast('Successfull');
+            this.CompanyName = "";
+            this.CompanyAddress = "";
+            this.CompanyTel = "";
+            this.list=[];
+            this.updateValue();
+        }
   }
 
  updateValue(){
