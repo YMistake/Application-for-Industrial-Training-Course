@@ -14,6 +14,7 @@ import { Camera } from 'ionic-native';
 })
 export class UpprofilePage {
   upprofile = UpprofilePage;
+  year: any = "...";
   items:any;
   userdata: any;
   hostname:string;
@@ -25,6 +26,12 @@ export class UpprofilePage {
         .subscribe(data =>{
         this.items = JSON.parse(data['_body']);//get ip from server.json
         this.hostname = this.items.ip; //put ip into hostname
+
+        this.http.get(this.hostname + 'updateprofile')
+          .subscribe(data =>{
+            this.year = JSON.parse(data['_body']).year;
+          })
+
         },error=>{
             console.log(error);// Error getting the data
         } );
@@ -59,7 +66,6 @@ export class UpprofilePage {
   // }
 
 
-  @Input() AcademicYear = 2559;
   @Input() Major;
   @Input() SId;
   @Input() SPosition;
@@ -74,7 +80,7 @@ export class UpprofilePage {
   @Input() SpvTel;
 
   sendData(){
-    let AY = this.AcademicYear;
+    let AY = this.year;
     let MJ = this.Major;
     let SI = this.SId;
     let SP = this.SPosition;

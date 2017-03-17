@@ -25,7 +25,9 @@ import { AdminConfirmPage } from '../pages/admin-confirm/admin-confirm';
 import { AdminPinPage } from '../pages/admin-pin/admin-pin';
 import { LogoutPage } from '../pages/logout/logout';
 import { SignupCompanyPage } from '../pages/signup-company/signup-company';
-
+import { AdminAssignCompanyPage } from '../pages/admin-assign-company/admin-assign-company';
+import { AdminAssignCompanySelectPage } from '../pages/admin-assign-company-select/admin-assign-company-select';
+// import { TeaUpprofilePage } from '../pages/tea-upprofile/tea-upprofile';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,10 @@ import { SignupCompanyPage } from '../pages/signup-company/signup-company';
     AdminApprovePage,
     AdminConfirmPage,
     AdminPinPage,
-    SignupCompanyPage
+    SignupCompanyPage,
+    AdminAssignCompanyPage,
+    AdminAssignCompanySelectPage
+    // TeaUpprofilePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -83,7 +88,10 @@ import { SignupCompanyPage } from '../pages/signup-company/signup-company';
     AdminApprovePage,
     AdminConfirmPage,
     AdminPinPage,
-    SignupCompanyPage
+    SignupCompanyPage,
+    AdminAssignCompanyPage,
+    AdminAssignCompanySelectPage
+    // TeaUpprofilePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

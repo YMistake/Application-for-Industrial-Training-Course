@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 /*
   Generated class for the CpnAss page.
@@ -12,11 +12,13 @@ import { Http, Headers } from '@angular/http';
   templateUrl: 'cpn-ass.html'
 })
 export class CpnAssPage {
-  name: string;
+  name: any;
+  infor: any;
   items:any;
   hostname:string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
     this.name = navParams.data;
+    console.log("name : "+this.name);
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{
@@ -25,7 +27,6 @@ export class CpnAssPage {
         },error=>{
             console.log(error);// Error getting the data
         } );
-
   }
 
   ionViewDidLoad() {
@@ -79,17 +80,47 @@ export class CpnAssPage {
     let _20 = this._20;
     let _21 = this._21;
     let _22 = this._22;
+    let list = [_1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,_12,_13,_14,_15,_16,_17,_18,_19,_20,_21,_22];
     let Opinion = this.Opinion;
-    let body = `_1=${_1}&_2=${_2}&_3=${_3}&_4=${_4}&_5=${_5}&
-                _6=${_6}&_7=${_7}&_8=${_8}&_9=${_9}&_10=${_10}&
-                _11=${_11}&_12=${_12}&_13=${_13}&_14=${_14}&_15=${_15}&
-                _16=${_16}&_17=${_17}&_18=${_18}&_19=${_19}&_20=${_20}&_21=${_21}&_22=${_22}&Opinion=${Opinion}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-
-
+    if (Opinion == null || Opinion.trim() == "" || Opinion == undefined){
+      Opinion = "No Opinion";
+      console.log(Opinion);
+      console.log("Do OP")
+    }
+    let body = `id=${this.name.Id}&CName=${this.name.CName}&_1=${_1}&_2=${_2}&_3=${_3}&_4=${_4}&_5=${_5}&_6=${_6}&_7=${_7}&_8=${_8}&_9=${_9}&_10=${_10}&_11=${_11}&_12=${_12}&_13=${_13}&_14=${_14}&_15=${_15}&_16=${_16}&_17=${_17}&_18=${_18}&_19=${_19}&_20=${_20}&_21=${_21}&_22=${_22}&Opinion=${Opinion}`;
+    for (let item of list){
+      if (item == "n/a"){
+        let alert = this.alertCtrl.create({
+          title: 'Submit Failed',
+          subTitle: 'please check the score again!',
+          buttons: ['OK']
+        });
+        alert.present();
+        break;
+      } else {
+        this.http.post(this.hostname + 'student-for-company/company-assesment',body,{headers: headers})
+          .subscribe(data =>{
+            var report = JSON.parse(data['_body']).report;
+            if(report == 1){
+              let alert = this.alertCtrl.create({
+                title: 'Assesment Successfull',
+                subTitle: 'Thank you for taking care of our students all along.',
+                buttons: [{text: 'OK', handler: () => { this.navCtrl.pop();}}]
+              });
+              alert.present();
+            } else if (report == 0) {
+              let alert = this.alertCtrl.create({
+                title: 'Something Wrong',
+                subTitle: 'Please contact administrator.',
+                buttons: [{text: 'OK', handler: () => { this.navCtrl.pop();}}]
+              });
+              alert.present();
+            }
+          }); break;
+      }
+    }
   }
-
-
 }

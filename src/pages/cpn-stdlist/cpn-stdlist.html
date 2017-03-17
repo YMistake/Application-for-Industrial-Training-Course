@@ -18,11 +18,11 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of data">
+    <ion-item *ngFor="let item of student">
       <ion-thumbnail item-left>
-        <img src="img/thumbnail-totoro.png">
+        <img [src]="item.picture">
       </ion-thumbnail>
-      <h2>{{item}}</h2>
+      <h2>{{item.Firstname}} {{item.Lastname}}</h2>
       <button ion-button clear item-right [navPush]="assessment" [navParams]=item>More</button>
     </ion-item>
   </ion-list>

@@ -35,9 +35,9 @@ export class StudentInforPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     this.student=navParams.data;
     console.log(this.student);
-    this.userid = this.student[0].Id;
-    this.firstname = this.student[0].Firstname;
-    this.lastname = this.student[0].Lastname;
+    this.userid = this.student.Id;
+    this.firstname = this.student.Firstname;
+    this.lastname = this.student.Lastname;
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{

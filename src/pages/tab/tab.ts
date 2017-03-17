@@ -12,11 +12,13 @@ import { RecordPage } from '../record/record';
 import { LogoutPage } from '../logout/logout';
 
 import { TeaSpvsPage } from '../tea-spvs/tea-spvs';
+// import { TeaUpprofilePage } from '../tea-upprofile/tea-upprofile';
 
 import { CpnStdlistPage } from '../cpn-stdlist/cpn-stdlist';
 
 import { AdminAnnouncePage } from '../admin-announce/admin-announce';
 import { AdminApprovePage } from '../admin-approve/admin-approve';
+import { AdminAssignCompanyPage } from '../admin-assign-company/admin-assign-company';
 
 /*
   Generated class for the Tab page.
@@ -58,6 +60,7 @@ export class TabPage {
     else if(this.chkRole == "teacher"){
       this.pages = [
         { title: "Home", component: HomePage},
+        // { title: "Update Profile", component: TeaUpprofilePage},
         { title: "Supervision", component: TeaSpvsPage},
         { title: "Logout", component: LogoutPage}
       ];
@@ -72,6 +75,7 @@ export class TabPage {
     else if(this.chkRole == "admin"){
       this.pages = [
         { title: "Home", component: HomePage},
+        { title: "Assign Company to Teacher", component: AdminAssignCompanyPage},
         { title: "Announcement", component: AdminAnnouncePage},
         { title: "Approve the company", component: AdminApprovePage},
         { title: "Logout", component: LogoutPage}
@@ -89,7 +93,7 @@ export class TabPage {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
-    this.ionViewDidLoad();
+    // this.ionViewDidLoad();
     // this.pages = [
     //   { title: "New", component: HomePage}
     // ];

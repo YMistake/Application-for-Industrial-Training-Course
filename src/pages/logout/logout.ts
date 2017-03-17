@@ -20,7 +20,7 @@ export class LogoutPage {
     console.log('ionViewDidLoad LogoutPage');
     localStorage.removeItem("userdata");
     localStorage.removeItem("role");
-    // location.reload();
+    location.reload();
     this.navCtrl.setRoot(LoginPage)
   }
 
