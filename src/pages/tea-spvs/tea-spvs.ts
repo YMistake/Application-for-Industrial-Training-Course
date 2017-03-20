@@ -16,18 +16,26 @@ import { TeaComPage } from '../tea-com/tea-com';
 export class TeaSpvsPage {
   hostname: string;
   items: any;
+  userdata: any;
   company = TeaComPage;
-  CName = ["P&P","KMITL","Thai Airways"]; //บริษัทที่อยู่ในความดูแลของอาจารย์คนนั้นๆ
+  CName: any; //บริษัทที่อยู่ในความดูแลของอาจารย์คนนั้นๆ
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+    this.userdata = JSON.parse(localStorage.getItem("userdata"));
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{
         this.items = JSON.parse(data['_body']);//get ip from server.json
         this.hostname = this.items.ip; //put ip into hostname
-        },error=>{
-            console.log(error);// Error getting the data
-        } );
+
+        let body = `id=${this.userdata.id}`;
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        this.http.post(this.hostname + 'teacher_supervision',body,{headers: headers})
+          .subscribe(data =>{
+            this.CName = JSON.parse(data['_body']).CName;
+          });
+        });
 
   }
 

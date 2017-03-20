@@ -91,8 +91,10 @@ export class CpnAssPage {
       console.log("Do OP")
     }
     let body = `id=${this.name.Id}&CName=${this.name.CName}&_1=${_1}&_2=${_2}&_3=${_3}&_4=${_4}&_5=${_5}&_6=${_6}&_7=${_7}&_8=${_8}&_9=${_9}&_10=${_10}&_11=${_11}&_12=${_12}&_13=${_13}&_14=${_14}&_15=${_15}&_16=${_16}&_17=${_17}&_18=${_18}&_19=${_19}&_20=${_20}&_21=${_21}&_22=${_22}&Opinion=${Opinion}`;
+    let check = true;
     for (let item of list){
       if (item == "n/a"){
+        check = false;
         let alert = this.alertCtrl.create({
           title: 'Submit Failed',
           subTitle: 'please check the score again!',
@@ -100,27 +102,28 @@ export class CpnAssPage {
         });
         alert.present();
         break;
-      } else {
-        this.http.post(this.hostname + 'student-for-company/company-assesment',body,{headers: headers})
-          .subscribe(data =>{
-            var report = JSON.parse(data['_body']).report;
-            if(report == 1){
-              let alert = this.alertCtrl.create({
-                title: 'Assesment Successfull',
-                subTitle: 'Thank you for taking care of our students all along.',
-                buttons: [{text: 'OK', handler: () => { this.navCtrl.pop();}}]
-              });
-              alert.present();
-            } else if (report == 0) {
-              let alert = this.alertCtrl.create({
-                title: 'Something Wrong',
-                subTitle: 'Please contact administrator.',
-                buttons: [{text: 'OK', handler: () => { this.navCtrl.pop();}}]
-              });
-              alert.present();
-            }
-          }); break;
-      }
+      } 
+    }
+    if (check){
+      this.http.post(this.hostname + 'student-for-company/company-assesment',body,{headers: headers})
+        .subscribe(data =>{
+          var report = JSON.parse(data['_body']).report;
+          if(report == 1){
+            let alert = this.alertCtrl.create({
+              title: 'Assesment Successfull',
+              subTitle: 'Thank you for taking care of our students all along.',
+              buttons: [{text: 'OK', handler: () => { this.navCtrl.pop();}}]
+            });
+            alert.present();
+          } else if (report == 0) {
+            let alert = this.alertCtrl.create({
+              title: 'Something Wrong',
+              subTitle: 'Please contact administrator.',
+              buttons: [{text: 'OK', handler: () => { this.navCtrl.pop();}}]
+            });
+            alert.present();
+          }
+        });
     }
   }
 }

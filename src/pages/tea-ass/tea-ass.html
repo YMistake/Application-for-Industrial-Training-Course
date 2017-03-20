@@ -7,17 +7,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{name}}</ion-title>
+    <ion-title>{{SData.Firstname}} {{SData.Lastname}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding-left>
-  <img> <!--โชว์รูปใหญ่-->
-  <p>Company - </p>
-  <p>Position - </p>
-  <p>Telephone - </p>
+<ion-content padding>
+  <img [src]="SData.picture">
+  <p>Company - {{SData.CName}}</p>
+  <p>Position - {{SData.SPosition}}</p>
+  <p>Telephone - {{SData.STel}}</p>
   <h3 style="text-align: center">แบบประเมิน</h3>
   <h6>เกณฑ์การให้คะแนน</h6>
   <p margin-left>5 = ดีมาก</p>
@@ -302,7 +302,7 @@
   </ion-item>
 
   <div padding>
-    <button ion-button block navPop (click)="sendData()">Submit</button>
+    <button ion-button block (click)="sendData()">Submit</button>
   </div>
 
 </ion-content>
