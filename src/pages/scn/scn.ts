@@ -19,6 +19,8 @@ export class ScnPage {
   show: boolean = true;
   list=[];
   errorMessage: string;
+  status: any;
+  status_text: any;
   temp= "assets/image/Default.png";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -30,6 +32,24 @@ export class ScnPage {
           .subscribe(data =>{
           this.items = JSON.parse(data['_body']);//get ip from server.json
           this.hostname = this.items.ip; //put ip into hostname
+
+          let body = `id=${this.userdata.id}`;
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          this.http.post(this.hostname + 'sent-company-check',body,{headers: headers})
+            .subscribe(data => {
+              this.status = JSON.parse(data['_body']);
+              console.log(this.status);
+              if (this.status[0].Status == 1){
+                this.status_text = "รอการอนุมัติ";
+              } else if (this.status[0].Status == 2){
+                this.status_text = "อนุมัติแล้ว";
+              } else if (this.status[0].Status == 3) {
+                this.status_text = "ไม่อนุมัติ ส่งชื่อบริษัทใหม่";
+              } else {
+                this.status_text = "ยังไม่ส่งชื่อบริษัท";
+              }
+            })
           },error=>{
               console.log(error);// Error getting the data
           } );

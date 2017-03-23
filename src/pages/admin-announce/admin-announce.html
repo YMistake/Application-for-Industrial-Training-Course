@@ -19,8 +19,8 @@
 <ion-content>
   <!--ส่วนประกาศข่าว-->
   <ion-item>
-    <ion-label floating>Insert announcement in this field</ion-label>
-    <ion-textarea elastic [(ngModel)]="announce"></ion-textarea>
+    <ion-label floating>กรุณากรอกข่าวสารที่ต้องการประกาศลงในกล่องข้อความ</ion-label>
+    <ion-textarea elastic [(ngModel)]="news"></ion-textarea>
   </ion-item>
 
   <!--ส่วนเลือกผู้รับข่าว-->
@@ -28,20 +28,20 @@
   <h6 margin-top padding-left>กรุณาเลือกผู้รับข่าวสาร</h6>
   <ion-item>
     <ion-label>Student</ion-label>
-    <ion-checkbox color="dark" checked="true" [(ngModel)]="student"></ion-checkbox>
+    <ion-checkbox color="dark" (ionChange)="studentStatus($event.checked)"></ion-checkbox>
   </ion-item>
   <ion-item>
     <ion-label>Teacher</ion-label>
-    <ion-checkbox color="dark" [(ngModel)]="teacher"></ion-checkbox>
+    <ion-checkbox color="dark" (ionChange)="teacherStatus($event.checked)"></ion-checkbox>
   </ion-item>
   <ion-item>
     <ion-label>Company</ion-label>
-    <ion-checkbox color="dark" [(ngModel)]="company"></ion-checkbox>
+    <ion-checkbox color="dark" (ionChange)="companyStatus($event.checked)"></ion-checkbox>
   </ion-item>
 
   <div style="height: 40px"></div>
 
   <div padding-left padding-right>
-    <button ion-button block (click)="presentToast()">Submit</button>
+    <button ion-button block (click)="sendData()">Submit</button>
   </div>
 </ion-content>

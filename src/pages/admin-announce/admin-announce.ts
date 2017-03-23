@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 /*
   Generated class for the AdminAnnounce page.
@@ -12,9 +12,13 @@ import { Http, Headers } from '@angular/http';
   templateUrl: 'admin-announce.html'
 })
 export class AdminAnnouncePage {
+  @Input() news;
+  student: any = 0;
+  teacher: any = 0;
+  company: any = 0;
   items:any;
   hostname:string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl: AlertController, private toastCtrl: ToastController, public http: Http) {
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{
@@ -39,19 +43,49 @@ export class AdminAnnouncePage {
     toast.present();
   }
 
-  @Input() announce;
-  @Input() student = "true";
-  @Input() teacher;
-  @Input() company;
+  studentStatus(item){
+    if(item == true){
+      this.student = 1;
+    } else {
+      this.student = 0;
+    }
+  }
+
+  teacherStatus(item){
+    if(item == true){
+      this.teacher = 1;
+    } else {
+      this.teacher = 0;
+    }
+  }
+
+  companyStatus(item){
+    if(item == true){
+      this.company = 1;
+    } else {
+      this.company = 0;
+    }
+  }
 
   sendData(){
-    let announce = this.announce;
-    let student = this.student;
-    let teacher = this.teacher;
-    let company = this.company;
-    let body = `announce=${announce}&student=${student}&teacher=${teacher}&company=${company}`;
+    console.log(this.student);
+    let body = `news=${this.news}&student=${this.student}&teacher=${this.teacher}&company=${this.company}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-
+    this.http.post(this.hostname + 'news', body, {headers: headers})
+      .subscribe( data => {
+        var report = JSON.parse(data['_body']).report;
+        if(report = 1){
+          this.presentToast();
+          this.news = "";
+        } else {
+          let alert = this.alertCtrl.create({
+            title: 'Submit Failed',
+            subTitle: 'Please check the server or database',
+            buttons: ['OK']
+          });
+          alert.present();
+        }
+      })
   }
 }

@@ -18,5 +18,9 @@
 
 <ion-content>
   <h3 padding-top>แจ้งข่าวสารการฝึกงาน</h3>
-  <p padding>เดี๋ยวตรงนี้รับจากดาต้าเบส เอามาจากที่ Admin โพสให้</p>
+  <ion-list inset>
+    <button ion-item  *ngFor = "let item of show; let i = index" (click) = "sendData(i,item)">
+      {{item}}
+    </button>
+  </ion-list>
 </ion-content>

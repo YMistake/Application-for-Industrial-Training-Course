@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Http,Headers } from '@angular/http';
 import { AdminConfirmPage } from '../admin-confirm/admin-confirm';
 /*
   Generated class for the AdminApprove page.
@@ -12,10 +13,24 @@ import { AdminConfirmPage } from '../admin-confirm/admin-confirm';
   templateUrl: 'admin-approve.html'
 })
 export class AdminApprovePage {
+  items: any;
+  hostname: string;
+  company: any;
   confirm = AdminConfirmPage;
-  items=["P&P","Thai Airway"];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
+    this.http = http;
+    this.http.get("assets/server.json")
+      .subscribe( data => {
+        this.items = JSON.parse(data['_body']);//get ip from server.json
+        this.hostname = this.items.ip; //put ip into hostname
+
+        this.http.get(this.hostname + 'approve')
+          .subscribe(data => {
+            this.company = JSON.parse(data['_body']).data;
+          })
+      })
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminApprovePage');

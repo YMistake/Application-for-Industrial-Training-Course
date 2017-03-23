@@ -19,8 +19,8 @@
 <ion-content>
   <h6 padding-left>Company Lists</h6>
   <ion-list inset>
-    <button ion-item *ngFor="let item of items" [navPush]="confirm" [navParams]=item>
-      {{ item }}
+    <button ion-item *ngFor="let item of company" [navPush]="confirm" [navParams]=item>
+      {{ item.CName }}
     </button>
   </ion-list>
 

@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { App, NavController, NavParams } from 'ionic-angular';
-import { LoginPage } from '../login/login';
-import { SignupPage } from '../signup/signup';
-import { ScnPage } from '../scn/scn';
-import { UpprofilePage } from '../upprofile/upprofile';
-import { ReviewPage } from '../review/review';
-import { DownloadPage } from '../download/download';
-import { RecordPage } from '../record/record';
+import { Http, Headers } from '@angular/http';
+import { NewsPage } from '../news/news';
+
 
 /*
   Generated class for the Home page.
@@ -19,17 +15,42 @@ import { RecordPage } from '../record/record';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  loginPage = LoginPage;
-  signupPage = SignupPage;
   Role: string;
+  items:any;
+  hostname:string;
+  news: any;
+  show = [];
+  nextpage = NewsPage;
+  // pages: Array<{title: string, component: any}>;
 
-  pages: Array<{title: string, component: any}>;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public app: App) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public app: App) {
     this.Role = localStorage.getItem("role");
     console.log(this.Role);
+    this.http = http;
+    this.http.get("assets/server.json")
+        .subscribe(data =>{
+        this.items = JSON.parse(data['_body']);//get ip from server.json
+        this.hostname = this.items.ip; //put ip into hostname
+
+        let body = `role=${this.Role}`;
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        this.http.post(this.hostname + 'home', body, {headers: headers})
+          .subscribe(data =>{
+            this.news = JSON.parse(data['_body']).news;
+            for (let item of this.news){
+              this.show.push(item.News.slice(0,30)+"...");
+            }
+
+          })
+        },error=>{
+            console.log(error);// Error getting the data
+        } );
   }
 
+  sendData(i,item){
+    this.navCtrl.push(NewsPage, this.news[i]);
+  }
 
 
   ionViewDidLoad() {

@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{name}}</ion-title>
+    <ion-title>{{name.CName}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,18 +15,21 @@
 
 <ion-content padding>
   <!--ใส่รูป-->
+
+  <p><b>Address</b> - {{address}}</p>
+  <p><b>Tel</b> - {{tel}}</p>
   <h6>Student Lists</h6>
-  <p padding-left *ngFor="let item of items">{{item}}</p>
+  <p padding-left *ngFor="let item of student">{{item.SId}}&nbsp;&nbsp;{{item.Firstname}}&nbsp;&nbsp;{{item.Lastname}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.Major}}</p>
 
 </ion-content>
 <ion-footer>
   <ion-grid>
     <ion-row>
       <ion-col width-50>
-        <button ion-button block navPop>Approve</button>
+        <button ion-button block (click)="approve()">Approve</button>
       </ion-col>
       <ion-col width-50>
-        <button ion-button block color = "danger" navPop>Disapprove</button>
+        <button ion-button block color = "danger" (click)="disapprove()">Disapprove</button>
       </ion-col>
     </ion-row>
   </ion-grid>
