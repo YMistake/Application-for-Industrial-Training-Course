@@ -237,6 +237,14 @@ module.exports = [
         "clobbers": [
             "window.FilePath"
         ]
+    },
+    {
+        "id": "onesignal-cordova-plugin.OneSignal",
+        "file": "plugins/onesignal-cordova-plugin/www/OneSignal.js",
+        "pluginId": "onesignal-cordova-plugin",
+        "clobbers": [
+            "OneSignal"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -248,7 +256,8 @@ module.exports.metadata =
     "cordova-plugin-inappbrowser": "1.6.1",
     "cordova-plugin-file": "4.3.2",
     "cordova-plugin-file-transfer": "1.6.2",
-    "cordova-plugin-filepath": "1.0.2"
+    "cordova-plugin-filepath": "1.0.2",
+    "onesignal-cordova-plugin": "2.0.11"
 };
 // BOTTOM OF METADATA
 });

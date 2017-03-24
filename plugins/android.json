@@ -24,6 +24,9 @@
         },
         "cordova-plugin-filepath": {
             "PACKAGE_NAME": "com.ionicframework.ait2597036"
+        },
+        "onesignal-cordova-plugin": {
+            "PACKAGE_NAME": "com.ionicframework.ait2597036"
         }
     },
     "dependent_plugins": {

@@ -26,7 +26,7 @@ export class LoginPage {
   userid: any;
   role: string;
   picture: any;
-  @Input() Role;
+  @Input() Role = "user";
   @ViewChild(Nav) nav: Nav;
   items:any; // ใช้เก็บ Json
   // signupPage = SignupPage; // เก็บหน้าลิงค์

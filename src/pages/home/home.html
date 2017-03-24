@@ -17,6 +17,15 @@
 
 
 <ion-content>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <h3 padding-top>แจ้งข่าวสารการฝึกงาน</h3>
   <ion-list inset>
     <button ion-item  *ngFor = "let item of show; let i = index" (click) = "sendData(i,item)">

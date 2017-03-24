@@ -41,6 +41,9 @@ export class HomePage {
             for (let item of this.news){
               this.show.push(item.News.slice(0,30)+"...");
             }
+            if( this.show.length > 10){
+              this.show = this.show.slice(0,10);
+            }
 
           })
         },error=>{
@@ -52,6 +55,28 @@ export class HomePage {
     this.navCtrl.push(NewsPage, this.news[i]);
   }
 
+  doRefresh(refresher) {
+
+      console.log('Begin async operation', refresher);
+
+      setTimeout(() => {
+        let body = `role=${this.Role}`;
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        this.http.post(this.hostname + 'home', body, {headers: headers})
+          .subscribe(data =>{
+            this.news = JSON.parse(data['_body']).news;
+            for (let item of this.news){
+              this.show.push(item.News.slice(0,30)+"...");
+            }
+            if( this.show.length > 10){
+              this.show = this.show.slice(0,10);
+            }
+          });
+        console.log('Async operation has ended');
+        refresher.complete();
+      }, 2000);
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');

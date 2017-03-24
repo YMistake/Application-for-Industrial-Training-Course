@@ -22109,6 +22109,14 @@ sub {
   }
 }
 
+.toolbar-background {
+  background-color: #f7caf0;
+}
+
+ion-title {
+  color: black;
+}
+
 page-admin-announce textarea {
   resize: none;
 }
