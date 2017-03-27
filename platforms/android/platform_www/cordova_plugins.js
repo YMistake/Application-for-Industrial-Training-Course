@@ -245,6 +245,22 @@ module.exports = [
         "clobbers": [
             "OneSignal"
         ]
+    },
+    {
+        "id": "com.megster.cordova.FileChooser.FileChooser",
+        "file": "plugins/com.megster.cordova.FileChooser/www/fileChooser.js",
+        "pluginId": "com.megster.cordova.FileChooser",
+        "clobbers": [
+            "fileChooser"
+        ]
+    },
+    {
+        "id": "com.cesidiodibenedetto.filechooser.FileChooser",
+        "file": "plugins/com.cesidiodibenedetto.filechooser/www/filechooser.js",
+        "pluginId": "com.cesidiodibenedetto.filechooser",
+        "clobbers": [
+            "FileChooser"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -257,7 +273,9 @@ module.exports.metadata =
     "cordova-plugin-file": "4.3.2",
     "cordova-plugin-file-transfer": "1.6.2",
     "cordova-plugin-filepath": "1.0.2",
-    "onesignal-cordova-plugin": "2.0.11"
+    "onesignal-cordova-plugin": "2.0.11",
+    "com.megster.cordova.FileChooser": "0.0.0",
+    "com.cesidiodibenedetto.filechooser": "1.0.4"
 };
 // BOTTOM OF METADATA
 });

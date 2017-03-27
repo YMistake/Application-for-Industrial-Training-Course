@@ -1,5 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, NavController } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ScnPage } from '../pages/scn/scn';
@@ -28,6 +28,8 @@ import { SignupCompanyPage } from '../pages/signup-company/signup-company';
 import { AdminAssignCompanyPage } from '../pages/admin-assign-company/admin-assign-company';
 import { AdminAssignCompanySelectPage } from '../pages/admin-assign-company-select/admin-assign-company-select';
 import { NewsPage } from '../pages/news/news';
+import { UploadfilePage } from '../pages/uploadfile/uploadfile';
+import { FileChooser } from '@ionic-native/file-chooser';
 
 @NgModule({
   declarations: [
@@ -58,8 +60,8 @@ import { NewsPage } from '../pages/news/news';
     SignupCompanyPage,
     AdminAssignCompanyPage,
     AdminAssignCompanySelectPage,
-    NewsPage
-    // TeaUpprofilePage
+    NewsPage,
+    UploadfilePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -92,9 +94,9 @@ import { NewsPage } from '../pages/news/news';
     SignupCompanyPage,
     AdminAssignCompanyPage,
     AdminAssignCompanySelectPage,
-    NewsPage
-    // TeaUpprofilePage
+    NewsPage,
+    UploadfilePage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, FileChooser]
 })
 export class AppModule {}

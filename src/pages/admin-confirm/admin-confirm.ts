@@ -19,6 +19,7 @@ export class AdminConfirmPage {
   student: any;
   address: any;
   tel: any;
+  img: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public http: Http) {
     this.name = navParams.data;
     this.http.get("assets/server.json")
@@ -32,6 +33,8 @@ export class AdminConfirmPage {
         this.http.post(this.hostname + 'approve/confirm', body, {headers: headers})
           .subscribe(data => {
             this.student = JSON.parse(data['_body']).data;
+            this.img = JSON.parse(data['_body']).img;
+            console.log(this.img);
             this.address = this.student[0].CAddress;
             this.tel = this.student[0].CTel;
           })

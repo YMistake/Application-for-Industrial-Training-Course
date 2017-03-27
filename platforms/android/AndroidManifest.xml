@@ -21,6 +21,19 @@
                 <category android:name="com.ionicframework.ait2597036" />
             </intent-filter>
         </receiver>
+        <activity android:enabled="@bool/use_activity" android:exported="true" android:icon="@drawable/ic_chooser" android:label="@string/choose_file" android:name="com.ipaulpro.afilechooser.FileChooserActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.GET_CONTENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+        <provider android:authorities="com.crypho.localstorage.documents" android:enabled="@bool/use_provider" android:exported="true" android:grantUriPermissions="true" android:name="com.crypho.localstorage.LocalStorageProvider" android:permission="android.permission.MANAGE_DOCUMENTS">
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+            </intent-filter>
+        </provider>
     </application>
     <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="24" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

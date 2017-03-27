@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NavController, NavParams, AlertController, ActionSheetController, ToastController, Platform, LoadingController, Loading  } from 'ionic-angular';
-import { Camera, File, Transfer, FilePath } from 'ionic-native';
-import { Http, Headers } from '@angular/http';
+import { Camera } from 'ionic-native';
+import { Http, Headers, ResponseContentType } from '@angular/http';
 /*
   Generated class for the Scn page.
 
@@ -38,13 +38,13 @@ export class ScnPage {
           headers.append('Content-Type', 'application/x-www-form-urlencoded');
           this.http.post(this.hostname + 'sent-company-check',body,{headers: headers})
             .subscribe(data => {
-              this.status = JSON.parse(data['_body']);
+              this.status = JSON.parse(data['_body']).data;
               console.log(this.status);
-              if (this.status[0].Status == 1){
+              if (this.status == 1){
                 this.status_text = "รอการอนุมัติ";
-              } else if (this.status[0].Status == 2){
+              } else if (this.status == 2){
                 this.status_text = "อนุมัติแล้ว";
-              } else if (this.status[0].Status == 3) {
+              } else if (this.status == 3) {
                 this.status_text = "ไม่อนุมัติ ส่งชื่อบริษัทใหม่";
               } else {
                 this.status_text = "ยังไม่ส่งชื่อบริษัท";
@@ -80,13 +80,13 @@ export class ScnPage {
           });
           alert.present();
         } else {
-          let body = `id=${this.userdata.id}&CompanyName=${this.CompanyName}&CompanyAddress=${this.CompanyAddress}&CompanyTel=${this.CompanyTel}`;
+          let body = `id=${this.userdata.id}&CompanyName=${this.CompanyName}&CompanyAddress=${this.CompanyAddress}&CompanyTel=${this.CompanyTel}&img=${this.temp}`;
           let headers = new Headers();
           headers.append('Content-Type', 'application/x-www-form-urlencoded');
           for (let list of this.list){
             body += `&list[]=${list.id}`;
           }
-          this.http.post(this.hostname + 'sent-company', body, {headers: headers})
+          this.http.post(this.hostname + 'sent-company', body, {headers: headers, responseType: ResponseContentType.Blob})
             .subscribe(
               data => {
 
@@ -100,6 +100,7 @@ export class ScnPage {
             this.CompanyTel = "";
             this.list=[];
             this.updateValue();
+            this.temp = "assets/image/Default.png";
         }
   }
 
@@ -161,6 +162,7 @@ export class ScnPage {
    Camera.getPicture(options).then((imageData) => {
     let base64Image = "data:image/jpeg;base64," + imageData;
     this.temp = base64Image;
+    console.log(this.temp);
    }, (err) => {
  });
  }

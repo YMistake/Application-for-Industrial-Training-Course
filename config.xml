@@ -18,6 +18,7 @@
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
   </platform>
+  <preference name="loadUrlTimeoutValue" value="1000000"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
@@ -33,7 +34,7 @@
   <plugin name="cordova-plugin-console" spec="1.0.5"/>
   <!--plugin name="cordova-plugin-statusbar" spec="2.2.1"/-->
   <plugin name="cordova-plugin-device" spec="1.1.4"/>
-  <!--plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/-->
+  <!-- <plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/> -->
 <!-- The above is equivalent to these three declarations -->
 <allow-navigation href="http://*/*" />
 <allow-navigation href="https://*/*" />

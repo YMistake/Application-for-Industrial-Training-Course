@@ -22110,11 +22110,7 @@ sub {
 }
 
 .toolbar-background {
-  background-color: #f7caf0;
-}
-
-ion-title {
-  color: black;
+  background-color: #fde6f6;
 }
 
 page-admin-announce textarea {

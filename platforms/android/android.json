@@ -39,6 +39,16 @@
                         {
                             "xml": "<feature name=\"OneSignalPush\"><param name=\"android-package\" value=\"com.plugin.gcm.OneSignalPush\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FileChooser\"><param name=\"android-package\" value=\"com.cesidiodibenedetto.filechooser.FileChooser\" /></feature>",
+                            "count": 1
+                        }
+                    ],
+                    "/widget": [
+                        {
+                            "xml": "<feature name=\"FileChooser\"><param name=\"android-package\" value=\"com.megster.cordova.FileChooser\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -73,6 +83,14 @@
                         {
                             "xml": "<uses-permission android:name=\"com.ionicframework.ait2597036.permission.RECEIVE_ADM_MESSAGE\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
                         }
                     ],
                     "/manifest/application": [
@@ -86,6 +104,44 @@
                         },
                         {
                             "xml": "<receiver android:name=\"com.onesignal.ADMMessageHandler$Receiver\" android:permission=\"com.amazon.device.messaging.permission.SEND\"><intent-filter><action android:name=\"com.amazon.device.messaging.intent.REGISTRATION\" /><action android:name=\"com.amazon.device.messaging.intent.RECEIVE\" /><category android:name=\"com.ionicframework.ait2597036\" /></intent-filter></receiver>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:enabled=\"@bool/use_activity\" android:exported=\"true\" android:icon=\"@drawable/ic_chooser\" android:label=\"@string/choose_file\" android:name=\"com.ipaulpro.afilechooser.FileChooserActivity\"><intent-filter><action android:name=\"android.intent.action.GET_CONTENT\" /><category android:name=\"android.intent.category.DEFAULT\" /><category android:name=\"android.intent.category.OPENABLE\" /><data android:mimeType=\"*/*\" /></intent-filter></activity>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<provider android:authorities=\"com.crypho.localstorage.documents\" android:enabled=\"@bool/use_provider\" android:exported=\"true\" android:grantUriPermissions=\"true\" android:name=\"com.crypho.localstorage.LocalStorageProvider\" android:permission=\"android.permission.MANAGE_DOCUMENTS\"><intent-filter><action android:name=\"android.content.action.DOCUMENTS_PROVIDER\" /></intent-filter></provider>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "res/values/strings.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<string name=\"empty_directory\">Empty Directory</string>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<string name=\"storage_removed\">Storage was removed or unmounted.</string>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<string name=\"choose_file\">Select a file</string>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<string name=\"chooser_title\">File Browser</string>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<string name=\"error_selecting_file\">Error selecting File</string>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<string name=\"internal_storage\">Internal storage</string>",
                             "count": 1
                         }
                     ]
@@ -116,6 +172,12 @@
             "PACKAGE_NAME": "com.ionicframework.ait2597036"
         },
         "onesignal-cordova-plugin": {
+            "PACKAGE_NAME": "com.ionicframework.ait2597036"
+        },
+        "com.megster.cordova.FileChooser": {
+            "PACKAGE_NAME": "com.ionicframework.ait2597036"
+        },
+        "com.cesidiodibenedetto.filechooser": {
             "PACKAGE_NAME": "com.ionicframework.ait2597036"
         }
     },
@@ -366,6 +428,22 @@
             "clobbers": [
                 "OneSignal"
             ]
+        },
+        {
+            "id": "com.megster.cordova.FileChooser.FileChooser",
+            "file": "plugins/com.megster.cordova.FileChooser/www/fileChooser.js",
+            "pluginId": "com.megster.cordova.FileChooser",
+            "clobbers": [
+                "fileChooser"
+            ]
+        },
+        {
+            "id": "com.cesidiodibenedetto.filechooser.FileChooser",
+            "file": "plugins/com.cesidiodibenedetto.filechooser/www/filechooser.js",
+            "pluginId": "com.cesidiodibenedetto.filechooser",
+            "clobbers": [
+                "FileChooser"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -376,6 +454,8 @@
         "cordova-plugin-file": "4.3.2",
         "cordova-plugin-file-transfer": "1.6.2",
         "cordova-plugin-filepath": "1.0.2",
-        "onesignal-cordova-plugin": "2.0.11"
+        "onesignal-cordova-plugin": "2.0.11",
+        "com.megster.cordova.FileChooser": "0.0.0",
+        "com.cesidiodibenedetto.filechooser": "1.0.4"
     }
 }

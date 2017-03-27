@@ -19,7 +19,7 @@ import { CpnStdlistPage } from '../cpn-stdlist/cpn-stdlist';
 import { AdminAnnouncePage } from '../admin-announce/admin-announce';
 import { AdminApprovePage } from '../admin-approve/admin-approve';
 import { AdminAssignCompanyPage } from '../admin-assign-company/admin-assign-company';
-
+import { UploadfilePage } from '../uploadfile/uploadfile';
 /*
   Generated class for the Tab page.
 
@@ -78,6 +78,7 @@ export class TabPage {
         { title: "Assign Company to Teacher", component: AdminAssignCompanyPage},
         { title: "Announcement", component: AdminAnnouncePage},
         { title: "Approve the company", component: AdminApprovePage},
+        { title: "Upload Documents", component: UploadfilePage },
         { title: "Logout", component: LogoutPage}
       ];
     }
@@ -94,8 +95,6 @@ export class TabPage {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
     // this.ionViewDidLoad();
-    // this.pages = [
-    //   { title: "New", component: HomePage}
-    // ];
+
   }
 }
