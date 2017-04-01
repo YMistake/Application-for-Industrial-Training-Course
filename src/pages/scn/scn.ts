@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController, NavParams, AlertController, ActionSheetController, ToastController, Platform, LoadingController, Loading  } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ActionSheetController, ToastController, Platform, LoadingController  } from 'ionic-angular';
 import { Camera } from 'ionic-native';
 import { Http, Headers, ResponseContentType } from '@angular/http';
 /*
@@ -18,6 +18,7 @@ export class ScnPage {
   hostname:string;
   show: boolean = true;
   list=[];
+  loading: any;
   errorMessage: string;
   status: any;
   status_text: any;
@@ -68,6 +69,11 @@ export class ScnPage {
   @Input() CompanyAddress;
   @Input() CompanyTel;
   sendData(){
+    this.loading = this.loadingCtrl.create({
+      content: 'Uploading...',
+    });
+    this.loading.present();
+
     let list = this.list;
     if( list == null || list.length == 0 ||
         this.CompanyName == null || this.CompanyName.trim()=="" ||
@@ -86,15 +92,23 @@ export class ScnPage {
           for (let list of this.list){
             body += `&list[]=${list.id}`;
           }
-          this.http.post(this.hostname + 'sent-company', body, {headers: headers, responseType: ResponseContentType.Blob})
+          this.http.post(this.hostname + 'sent-company', body, {headers: headers})
             .subscribe(
               data => {
-
+                console.log(data['_body'])
+                var report = JSON.parse(data['_body']).report;
+                console.log(report);
+                if ( report = 1){
+                  this.loading.dismissAll();
+                  this.presentToast('Successfull');
+                }
               },
-              error =>  this.errorMessage = <any>error
+              error =>  {
+                this.loading.dismissAll()
+                this.errorMessage = <any>error
+                this.presentToast('Error while uploading file.');
+              }
             )
-            console.log(body);
-            this.presentToast('Successfull');
             this.CompanyName = "";
             this.CompanyAddress = "";
             this.CompanyTel = "";
@@ -162,7 +176,6 @@ export class ScnPage {
    Camera.getPicture(options).then((imageData) => {
     let base64Image = "data:image/jpeg;base64," + imageData;
     this.temp = base64Image;
-    console.log(this.temp);
    }, (err) => {
  });
  }

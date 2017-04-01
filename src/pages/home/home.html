@@ -16,7 +16,40 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content padding>
+  <div *ngIf="chkRole">
+    <h3>Dash Board</h3>
+    <p padding-top style="font-size: 120%">
+      <span>ปีการศึกษา : </span>
+      <span style="float: right"> {{year}} </span>
+    </p>
+    <p padding-top style="font-size: 120%">
+      <span>จำนวนนักศึกษาที่ลงทะเบียนทั้งหมด : </span>
+      <span style="float: right">{{num}} คน</span>
+    </p>
+    <p padding-top style="font-size: 120%">
+      <span>Computer : </span>
+      <span style="float: right">{{com}} คน</span>
+    </p>
+    <p padding-top style="font-size: 120%">
+      <span>Telecommunication : </span>
+      <span style="float: right">{{telecom}} คน</span>
+    </p>
+    <p padding-top style="font-size: 120%">
+      <span>Electronics : </span>
+      <span style="float: right">{{elec}} คน</span>
+    </p>
+  </div>
+
+
+  <div *ngIf="!chkRole">
+    <h3>แจ้งข่าวสารการฝึกงาน</h3>
+    <ion-list inset>
+      <button ion-item  *ngFor = "let item of show; let i = index" (click) = "sendData(i,item)">
+        {{item}}
+      </button>
+    </ion-list>
+  </div>
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
@@ -25,11 +58,4 @@
       refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
-
-  <h3 padding-top>แจ้งข่าวสารการฝึกงาน</h3>
-  <ion-list inset>
-    <button ion-item  *ngFor = "let item of show; let i = index" (click) = "sendData(i,item)">
-      {{item}}
-    </button>
-  </ion-list>
 </ion-content>

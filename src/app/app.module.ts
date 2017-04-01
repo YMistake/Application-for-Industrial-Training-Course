@@ -30,6 +30,7 @@ import { AdminAssignCompanySelectPage } from '../pages/admin-assign-company-sele
 import { NewsPage } from '../pages/news/news';
 import { UploadfilePage } from '../pages/uploadfile/uploadfile';
 import { FileChooser } from '@ionic-native/file-chooser';
+import { File } from '@ionic-native/file';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,6 @@ import { FileChooser } from '@ionic-native/file-chooser';
     NewsPage,
     UploadfilePage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, FileChooser]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, FileChooser, File]
 })
 export class AppModule {}

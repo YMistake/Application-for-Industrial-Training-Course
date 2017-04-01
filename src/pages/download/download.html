@@ -18,4 +18,9 @@
 
 <ion-content padding>
   <h4 style="text-align: center">Training's Document</h4>
+  <ion-list inset>
+    <button ion-item *ngFor="let item of filelist" (click)="download(item)">
+      {{ item }}
+    </button>
+  </ion-list>
 </ion-content>

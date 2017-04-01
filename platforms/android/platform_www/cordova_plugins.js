@@ -261,6 +261,14 @@ module.exports = [
         "clobbers": [
             "FileChooser"
         ]
+    },
+    {
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "pluginId": "cordova-plugin-splashscreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -275,7 +283,8 @@ module.exports.metadata =
     "cordova-plugin-filepath": "1.0.2",
     "onesignal-cordova-plugin": "2.0.11",
     "com.megster.cordova.FileChooser": "0.0.0",
-    "com.cesidiodibenedetto.filechooser": "1.0.4"
+    "com.cesidiodibenedetto.filechooser": "1.0.4",
+    "cordova-plugin-splashscreen": "4.0.2"
 };
 // BOTTOM OF METADATA
 });

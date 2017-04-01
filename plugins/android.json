@@ -33,6 +33,9 @@
         },
         "com.cesidiodibenedetto.filechooser": {
             "PACKAGE_NAME": "com.ionicframework.ait2597036"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.ait2597036"
         }
     },
     "dependent_plugins": {

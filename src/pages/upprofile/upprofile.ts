@@ -18,6 +18,7 @@ export class UpprofilePage {
   items:any;
   userdata: any;
   hostname:string;
+
   // temp = "assets/image/DefaultProfile.png";
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public http: Http, public alertCtrl: AlertController) {
     this.userdata = JSON.parse(localStorage.getItem("userdata"));
@@ -68,6 +69,9 @@ export class UpprofilePage {
 
   @Input() Major;
   @Input() SId;
+  @Input() firstname;
+  @Input() lastname;
+  @Input() email;
   @Input() SPosition;
   @Input() STel;
   @Input() SFacebook;
@@ -83,6 +87,9 @@ export class UpprofilePage {
     let AY = this.year;
     let MJ = this.Major;
     let SI = this.SId;
+    let FN = this.firstname;
+    let LN = this.lastname;
+    let EM = this.email;
     let SP = this.SPosition;
     let ST = this.STel;
     let SF = this.SFacebook;
@@ -96,6 +103,9 @@ export class UpprofilePage {
 
     if (MJ == null || MJ.trim()=="" ||
         SI == null || SI.trim()=="" ||
+        FN == null || FN.trim()=="" ||
+        LN == null || LN.trim()=="" ||
+        EM == null || EM.trim()=="" ||
         SP == null || SP.trim()=="" ||
         ST == null || ST.trim()=="" ||
         SF == null || SF.trim()=="" ||
@@ -113,7 +123,7 @@ export class UpprofilePage {
       });
       alert.present();
     } else {
-      let body = `id=${this.userdata.id}&AcademicYear=${AY}&Major=${MJ}&SId=${SI}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}`;
+      let body = `id=${this.userdata.id}&AcademicYear=${AY}&Major=${MJ}&SId=${SI}&Firstname=${FN}&Lastname=${LN}&email=${EM}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}`;
       let headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       this.http.post(this.hostname + 'updateprofile', body, {headers: headers})
@@ -123,7 +133,11 @@ export class UpprofilePage {
           }
         )
         this.presentToast();
+        this.Major = "";
         this.SId = "";
+        this.firstname = "";
+        this.lastname = "";
+        this.email = "";
         this.SPosition = "";
         this.STel = "";
         this.SFacebook = "";

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Http,Headers } from '@angular/http';
-
+import { AdminApprovePage } from '../admin-approve/admin-approve';
 /*
   Generated class for the AdminConfirm page.
 
@@ -34,7 +34,6 @@ export class AdminConfirmPage {
           .subscribe(data => {
             this.student = JSON.parse(data['_body']).data;
             this.img = JSON.parse(data['_body']).img;
-            console.log(this.img);
             this.address = this.student[0].CAddress;
             this.tel = this.student[0].CTel;
           })
@@ -50,7 +49,7 @@ export class AdminConfirmPage {
         var report = JSON.parse(data['_body']).report;
         if(report == 1){
           this.presentToast("Approve Successfull");
-          this.navCtrl.pop();
+          this.navCtrl.setRoot(AdminApprovePage);
         } else {
           this.presentToast("Failed, please check the server");
         }
@@ -66,7 +65,7 @@ export class AdminConfirmPage {
         var report = JSON.parse(data['_body']).report;
         if(report == 1){
           this.presentToast("Disapprove Successfull");
-          this.navCtrl.pop();
+          this.navCtrl.setRoot(AdminApprovePage);
         } else {
           this.presentToast("Failed, please check the server");
         }

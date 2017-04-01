@@ -15,5 +15,20 @@
 
 
 <ion-content padding>
-  <button ion-button block (click)="chooseFile()">Choose File</button>
+  <ion-item>
+    <ion-label floating>Add File Name</ion-label>
+    <ion-input type="text" [(ngModel)]="filename"></ion-input>
+  </ion-item>
+  <div style="height: 10%"></div>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-50>
+        <button ion-button outline (click)="chooseFile()">Choose File</button>
+      </ion-col>
+      <ion-col width-50>
+        <button ion-button block (click)="upload()">Upload File</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

@@ -50,7 +50,7 @@ export class SignupPage {
   @Input() lastname;
   @Input() email;
   @Input() email2;
-  @Input() role = "student";
+  @Input() role;
 
   sendData(){
     let id = this.id;
@@ -60,9 +60,6 @@ export class SignupPage {
     let email2 = this.email2;
     let role = this.role;
     let picture = this.picture;
-    console.log(role);
-    console.log(id);
-    console.log("picture when press submit: "+picture);
 
     if(
         first == null || first.trim()=="" ||
@@ -79,6 +76,13 @@ export class SignupPage {
       let alert = this.alertCtrl.create({
         title: 'Signup Failed',
         subTitle: 'E-mail and confirm E-mail does not match!',
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if( role == null) {
+      let alert = this.alertCtrl.create({
+        title: 'Signup Failed',
+        subTitle: 'Please select you role.',
         buttons: ['OK']
       });
       alert.present();
