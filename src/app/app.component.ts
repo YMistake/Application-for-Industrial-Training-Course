@@ -3,14 +3,6 @@ import { Nav, Platform, IonicApp, ToastController, App } from 'ionic-angular';
 import { StatusBar,Splashscreen } from 'ionic-native';
 
 import { LoginPage } from '../pages/login/login';
-import { HomePage } from '../pages/home/home';
-import { ScnPage } from '../pages/scn/scn';
-import { UpprofilePage } from '../pages/upprofile/upprofile';
-import { ReviewPage } from '../pages/review/review';
-import { DownloadPage } from '../pages/download/download';
-import { RecordPage } from '../pages/record/record';
-
-
 
 @Component({
   templateUrl: 'app.html'
@@ -22,23 +14,8 @@ export class MyApp {
   lastBack: any;
   allowClose: any;
 
-
-  // pages: Array<{title: string, component: any}>;
-
   constructor(public platform: Platform, public ionicApp: IonicApp, public toastCtrl: ToastController, public app: App) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    // this.pages = [
-    //   { title: 'Home Page', component: HomePage},
-    //   { title: "Send Company's Name", component: ScnPage},
-    //   { title: 'Update Profile', component: UpprofilePage},
-    //   { title: 'Write a Review', component: ReviewPage},
-    //   { title: 'Download', component: DownloadPage},
-    //   { title: 'Industrial Training Record', component: RecordPage},
-    //   { title: 'Logout', component: LoginPage}
-    // ];
-
   }
 
   initializeApp() {
@@ -46,7 +23,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
-      Splashscreen.hide();
+      Splashscreen.show();
 
       var notificationOpenedCallback = function(jsonData) {
         console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
@@ -85,10 +62,4 @@ export class MyApp {
       	this.lastBack = Date.now();
       });
   }
-
-  // openPage(page) {
-  //   // Reset the content nav to have just this page
-  //   // we wouldn't want the back button to show in this scenario
-  //   this.nav.setRoot(page.component);
-  // }
 }

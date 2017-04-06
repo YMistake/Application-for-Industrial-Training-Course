@@ -4,12 +4,7 @@ import { Http, Headers } from '@angular/http';
 import { LoginPage } from '../login/login';
 import { TabPage } from '../tab/tab';
 import { SignupCompanyPage } from '../signup-company/signup-company';
-/*
-  Generated class for the Signup page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html'
@@ -43,9 +38,6 @@ export class SignupPage {
     console.log('ionViewDidLoad SignupPage');
   }
 
-  // @Input() username;
-  // @Input() password;
-  // @Input() password2;
   @Input() firstname;
   @Input() lastname;
   @Input() email;
@@ -114,7 +106,5 @@ export class SignupPage {
           }
         )
     }
-
   }
-
 }

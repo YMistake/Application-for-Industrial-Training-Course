@@ -10,29 +10,19 @@ import { ReviewPage } from '../review/review';
 import { DownloadPage } from '../download/download';
 import { RecordPage } from '../record/record';
 import { LogoutPage } from '../logout/logout';
-
 import { TeaSpvsPage } from '../tea-spvs/tea-spvs';
-// import { TeaUpprofilePage } from '../tea-upprofile/tea-upprofile';
-
 import { CpnStdlistPage } from '../cpn-stdlist/cpn-stdlist';
-
 import { AdminAnnouncePage } from '../admin-announce/admin-announce';
 import { AdminApprovePage } from '../admin-approve/admin-approve';
 import { AdminAssignCompanyPage } from '../admin-assign-company/admin-assign-company';
 import { UploadfilePage } from '../uploadfile/uploadfile';
-/*
-  Generated class for the Tab page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-tab',
   templateUrl: 'tab.html'
 })
 export class TabPage {
   @ViewChild(Nav) nav: Nav;
-  // rootPage: any = HomePage;
 
   chkRole: string;
   new: any;
@@ -44,7 +34,6 @@ export class TabPage {
   }
 
   ionViewDidLoad() {
-    // this.chkRole = this.navParams.get("role");
     this.chkRole = localStorage.getItem("role");
     if(this.chkRole == "student"){
     this.pages = [
@@ -60,7 +49,6 @@ export class TabPage {
     else if(this.chkRole == "teacher"){
       this.pages = [
         { title: "Home", component: HomePage},
-        // { title: "Update Profile", component: TeaUpprofilePage},
         { title: "Supervision", component: TeaSpvsPage},
         { title: "Logout", component: LogoutPage}
       ];
@@ -91,10 +79,6 @@ export class TabPage {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
-    // this.ionViewDidLoad();
-
   }
 }

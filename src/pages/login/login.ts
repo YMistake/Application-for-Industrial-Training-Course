@@ -9,12 +9,6 @@ import 'rxjs/add/operator/map';
 
 declare var window: any;
 
-/*
-  Generated class for the Login page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -29,12 +23,8 @@ export class LoginPage {
   @Input() Role = "user";
   @ViewChild(Nav) nav: Nav;
   items:any; // ใช้เก็บ Json
-  // signupPage = SignupPage; // เก็บหน้าลิงค์
-  // fgpPage = FgpassPage;  // เก็บหน้าลิงค์
-  // chpPage = ChpassPage;  // เก็บหน้าลิงค์
   img = "assets/image/KMITL.png";
   hostname: string; // เก็บ ip server
-  // testUser = {username: undefined, password: undefined, role: "student"}; // ใช้ทดสอบ login
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public http: Http) {
     this.http = http;
@@ -136,11 +126,6 @@ export class LoginPage {
           console.log('error', error);
       })
 
-  }
-
-  logout(){
-      this.is_login = false;
-      this.user = [];
   }
 
   ionViewDidEnter() {
