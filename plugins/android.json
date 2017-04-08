@@ -7,13 +7,16 @@
         "files": {}
     },
     "installed_plugins": {
+        "com.megster.cordova.FileChooser": {
+            "PACKAGE_NAME": "com.ionicframework.ait2597036"
+        },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.ait2597036"
         },
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.ait2597036"
         },
-        "cordova-plugin-inappbrowser": {
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.ait2597036"
         },
         "cordova-plugin-file": {
@@ -25,16 +28,19 @@
         "cordova-plugin-filepath": {
             "PACKAGE_NAME": "com.ionicframework.ait2597036"
         },
-        "onesignal-cordova-plugin": {
-            "PACKAGE_NAME": "com.ionicframework.ait2597036"
-        },
-        "com.megster.cordova.FileChooser": {
-            "PACKAGE_NAME": "com.ionicframework.ait2597036"
-        },
-        "com.cesidiodibenedetto.filechooser": {
+        "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.ionicframework.ait2597036"
         },
         "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.ait2597036"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.ionicframework.ait2597036"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.ait2597036"
+        },
+        "onesignal-cordova-plugin": {
             "PACKAGE_NAME": "com.ionicframework.ait2597036"
         }
     },

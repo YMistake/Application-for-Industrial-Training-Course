@@ -1,6 +1,14 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+        "id": "com.megster.cordova.FileChooser.FileChooser",
+        "file": "plugins/com.megster.cordova.FileChooser/www/fileChooser.js",
+        "pluginId": "com.megster.cordova.FileChooser",
+        "clobbers": [
+            "fileChooser"
+        ]
+    },
+    {
         "id": "cordova-plugin-camera.Camera",
         "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
         "pluginId": "cordova-plugin-camera",
@@ -33,12 +41,11 @@ module.exports = [
         ]
     },
     {
-        "id": "cordova-plugin-inappbrowser.inappbrowser",
-        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-        "pluginId": "cordova-plugin-inappbrowser",
+        "id": "cordova-plugin-device.device",
+        "file": "plugins/cordova-plugin-device/www/device.js",
+        "pluginId": "cordova-plugin-device",
         "clobbers": [
-            "cordova.InAppBrowser.open",
-            "window.open"
+            "device"
         ]
     },
     {
@@ -239,27 +246,12 @@ module.exports = [
         ]
     },
     {
-        "id": "onesignal-cordova-plugin.OneSignal",
-        "file": "plugins/onesignal-cordova-plugin/www/OneSignal.js",
-        "pluginId": "onesignal-cordova-plugin",
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "pluginId": "cordova-plugin-inappbrowser",
         "clobbers": [
-            "OneSignal"
-        ]
-    },
-    {
-        "id": "com.megster.cordova.FileChooser.FileChooser",
-        "file": "plugins/com.megster.cordova.FileChooser/www/fileChooser.js",
-        "pluginId": "com.megster.cordova.FileChooser",
-        "clobbers": [
-            "fileChooser"
-        ]
-    },
-    {
-        "id": "com.cesidiodibenedetto.filechooser.FileChooser",
-        "file": "plugins/com.cesidiodibenedetto.filechooser/www/filechooser.js",
-        "pluginId": "com.cesidiodibenedetto.filechooser",
-        "clobbers": [
-            "FileChooser"
+            "cordova.InAppBrowser.open",
+            "window.open"
         ]
     },
     {
@@ -269,22 +261,41 @@ module.exports = [
         "clobbers": [
             "navigator.splashscreen"
         ]
+    },
+    {
+        "id": "ionic-plugin-keyboard.keyboard",
+        "file": "plugins/ionic-plugin-keyboard/www/android/keyboard.js",
+        "pluginId": "ionic-plugin-keyboard",
+        "clobbers": [
+            "cordova.plugins.Keyboard"
+        ],
+        "runs": true
+    },
+    {
+        "id": "onesignal-cordova-plugin.OneSignal",
+        "file": "plugins/onesignal-cordova-plugin/www/OneSignal.js",
+        "pluginId": "onesignal-cordova-plugin",
+        "clobbers": [
+            "OneSignal"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
+    "com.megster.cordova.FileChooser": "0.0.0",
     "cordova-plugin-compat": "1.1.0",
     "cordova-plugin-camera": "2.3.1",
-    "cordova-plugin-whitelist": "1.3.1",
-    "cordova-plugin-inappbrowser": "1.6.1",
+    "cordova-plugin-console": "1.0.5",
+    "cordova-plugin-device": "1.1.4",
     "cordova-plugin-file": "4.3.2",
     "cordova-plugin-file-transfer": "1.6.2",
     "cordova-plugin-filepath": "1.0.2",
-    "onesignal-cordova-plugin": "2.0.11",
-    "com.megster.cordova.FileChooser": "0.0.0",
-    "com.cesidiodibenedetto.filechooser": "1.0.4",
-    "cordova-plugin-splashscreen": "4.0.2"
+    "cordova-plugin-inappbrowser": "1.6.1",
+    "cordova-plugin-splashscreen": "4.0.2",
+    "cordova-plugin-whitelist": "1.3.1",
+    "ionic-plugin-keyboard": "2.2.1",
+    "onesignal-cordova-plugin": "2.0.11"
 };
 // BOTTOM OF METADATA
 });
