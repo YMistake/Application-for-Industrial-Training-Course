@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
-import { Camera } from 'ionic-native';
+
+import { TabPage } from '../tab/tab';
 /*
   Generated class for the Upprofile page.
 
@@ -13,26 +14,21 @@ import { Camera } from 'ionic-native';
   templateUrl: 'upprofile.html'
 })
 export class UpprofilePage {
-  upprofile = UpprofilePage;
-  year: any = "...";
+  tab = TabPage;
   items:any;
+  signupdata: any;
   userdata: any;
   hostname:string;
+  TelPattern=/([08]|[09]|[06])([0-9]{8})/;
 
-  // temp = "assets/image/DefaultProfile.png";
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController, public http: Http, public alertCtrl: AlertController) {
     this.userdata = JSON.parse(localStorage.getItem("userdata"));
+    this.signupdata = navParams.data;
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{
         this.items = JSON.parse(data['_body']);//get ip from server.json
         this.hostname = this.items.ip; //put ip into hostname
-
-        this.http.get(this.hostname + 'updateprofile')
-          .subscribe(data =>{
-            this.year = JSON.parse(data['_body']).year;
-          })
-
         },error=>{
             console.log(error);// Error getting the data
         } );
@@ -44,78 +40,34 @@ export class UpprofilePage {
 
   presentToast() {
   let toast = this.toastCtrl.create({
-    message: 'Profile is updated',
+    message: 'Create profile successfull',
     duration: 3000,
     position: 'bottom'
   });
   toast.present();
 }
 
-  // getPicture() {
-  //   let options = {
-  //     destinationType   : Camera.DestinationType.DATA_URL,
-  //     sourceType        : Camera.PictureSourceType.PHOTOLIBRARY,
-  //     correctOrientation: true
-  //   };
-  //
-  //   Camera.getPicture(options).then((imageData) => {
-  //    let base64Image = "data:image/jpeg;base64," + imageData;
-  //    this.temp = base64Image;
-  //   }, (err) => {
-  // });
-  //
-  // }
-
-
+  @Input() AcademicYear;
   @Input() Major;
   @Input() SId;
-  @Input() firstname;
-  @Input() lastname;
-  @Input() email;
-  @Input() SPosition;
   @Input() STel;
   @Input() SFacebook;
   @Input() SLine;
-  @Input() CName;
-  @Input() CAddress;
-  @Input() CTel;
-  @Input() SpvName;
-  @Input() SpvPosition;
-  @Input() SpvTel;
 
   sendData(){
-    let AY = this.year;
+    let AY = this.AcademicYear;
     let MJ = this.Major;
     let SI = this.SId;
-    let FN = this.firstname;
-    let LN = this.lastname;
-    let EM = this.email;
-    let SP = this.SPosition;
     let ST = this.STel;
     let SF = this.SFacebook;
     let SL = this.SLine;
-    let CN = this.CName;
-    let CA = this.CAddress;
-    let CT = this.CTel;
-    let SpvN = this.SpvName;
-    let SpvP = this.SpvPosition;
-    let SpvT = this.SpvTel;
 
-    if (MJ == null || MJ.trim()=="" ||
+    if (AY == null || AY.trim()=="" ||
+        MJ == null || MJ.trim()=="" ||
         SI == null || SI.trim()=="" ||
-        FN == null || FN.trim()=="" ||
-        LN == null || LN.trim()=="" ||
-        EM == null || EM.trim()=="" ||
-        SP == null || SP.trim()=="" ||
         ST == null || ST.trim()=="" ||
         SF == null || SF.trim()=="" ||
-        SL == null || SL.trim()=="" ||
-        CN == null || CN.trim()=="" ||
-        CA == null || CA.trim()=="" ||
-        CT == null || CT.trim()=="" ||
-        SpvN == null || SpvN.trim()=="" ||
-        SpvP == null || SpvP.trim()=="" ||
-        SpvT == null || SpvT.trim()=="" ) {
+        SL == null || SL.trim()=="" ) {
       let alert = this.alertCtrl.create({
         title: 'Update Failed',
         subTitle: 'please fill all required fields!',
@@ -123,31 +75,19 @@ export class UpprofilePage {
       });
       alert.present();
     } else {
-      let body = `id=${this.userdata.id}&AcademicYear=${AY}&Major=${MJ}&SId=${SI}&Firstname=${FN}&Lastname=${LN}&email=${EM}&SPosition=${SP}&STel=${ST}&SFacebook=${SF}&SLine=${SL}&CName=${CN}&CAddress=${CA}&CTel=${CT}&SpvName=${SpvN}&SpvPosition=${SpvP}&SpvTel=${SpvT}`;
+      let body = `id=${this.userdata.id}&AcademicYear=${AY}&Major=${MJ}&SID=${SI}&Tel=${ST}&Facebook=${SF}&Line=${SL}&firstname=${this.signupdata.firstname}&lastname=${this.signupdata.lastname}&email=${this.signupdata.email}&role=${this.signupdata.role}&picture=${this.signupdata.picture}`;
       let headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       this.http.post(this.hostname + 'updateprofile', body, {headers: headers})
         .subscribe(
           data => {
-
+            var report = JSON.parse(data['_body']).report;
+            if(report == 1){
+              this.navCtrl.push(TabPage);
+            }
           }
         )
         this.presentToast();
-        this.Major = "";
-        this.SId = "";
-        this.firstname = "";
-        this.lastname = "";
-        this.email = "";
-        this.SPosition = "";
-        this.STel = "";
-        this.SFacebook = "";
-        this.SLine = "";
-        this.CName = "";
-        this.CAddress = "";
-        this.CTel = "";
-        this.SpvName = "";
-        this.SpvPosition = "";
-        this.SpvTel = "";
     }
   }
 }

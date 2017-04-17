@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http,Headers } from '@angular/http';
 import { AdminConfirmPage } from '../admin-confirm/admin-confirm';
+import { AdminApproveHistoryPage } from '../admin-approve-history/admin-approve-history';
 /*
   Generated class for the AdminApprove page.
 
@@ -17,6 +18,7 @@ export class AdminApprovePage {
   hostname: string;
   company: any;
   confirm = AdminConfirmPage;
+  history = AdminApproveHistoryPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     this.http = http;

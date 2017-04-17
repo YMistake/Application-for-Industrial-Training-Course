@@ -15,12 +15,16 @@ import { LoginPage } from '../login/login';
   templateUrl: 'signup-company.html'
 })
 export class SignupCompanyPage {
-  id: any;
+  info: any;
   items: any;
   hostname: string;
   company = [];
+  TelPattern=/0([869])([0-9]{8})/;
+  PositionPattern=/\w/;
+  @Input() Position;
+  @Input() Tel;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
-    this.id = navParams.get("id");
+    this.info = navParams.data;
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{
@@ -41,29 +45,37 @@ export class SignupCompanyPage {
   }
 
   confirm(item){
-    let confirm = this.alertCtrl.create({
-      title: 'Please confirm',
-      message: 'Are you sure this is you company? If you have already chosen this company. You cannot edit it anymore.',
-      buttons: [
-        {
-          text: 'No',
-          handler: () => {
-            console.log('Disagree clicked');
+    if(this.Position == null || this.Position.trim()=="" || this.Tel == null || this.Tel.trim()==""){
+      let alert = this.alertCtrl.create({
+        subTitle: 'Please insert your Position and Telephone',
+        buttons: ['OK']
+      });
+      alert.present();
+    } else {
+      let confirm = this.alertCtrl.create({
+        title: 'Please confirm',
+        message: 'Are you sure this is you company? If you have already chosen this company. You cannot edit it anymore.',
+        buttons: [
+          {
+            text: 'No',
+            handler: () => {
+              console.log('Disagree clicked');
+            }
+          },
+          {
+            text: 'Yes',
+            handler: () => {
+              this.sendData(item);
+            }
           }
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            this.sendData(item);
-          }
-        }
-      ]
-    });
-    confirm.present();
+        ]
+      });
+      confirm.present();
+    }
   }
 
   sendData(item){
-    let body = `id=${this.id}&CName=${item}`;
+    let body = `id=${this.info.id}&Firstname=${this.info.firstname}&Lastname=${this.info.lastname}&Email=${this.info.email}&Role=${this.info.role}&Picture=${this.info.picture}&CompanyName=${item}&Position=${this.Position}&Tel=${this.Tel}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     this.http.post(this.hostname + 'signup-company2',body, {headers: headers})

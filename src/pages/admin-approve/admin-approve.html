@@ -20,8 +20,13 @@
   <h6 padding-left>Company Lists</h6>
   <ion-list inset>
     <button ion-item *ngFor="let item of company" [navPush]="confirm" [navParams]=item>
-      {{ item.CName }}
+      {{ item.CompanyName }}
     </button>
   </ion-list>
 
 </ion-content>
+<ion-footer>
+  <div style="text-align: center">
+    <button ion-button clear item-center [navPush]="history">Approve History</button>
+  </div>
+</ion-footer>

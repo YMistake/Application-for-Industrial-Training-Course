@@ -27,21 +27,21 @@ export class AdminConfirmPage {
         this.items = JSON.parse(data['_body']);//get ip from server.json
         this.hostname = this.items.ip; //put ip into hostname
 
-        let body = `CName=${this.name.CName}`;
+        let body = `CompanyName=${this.name.CompanyName}`;
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         this.http.post(this.hostname + 'approve/confirm', body, {headers: headers})
           .subscribe(data => {
             this.student = JSON.parse(data['_body']).data;
             this.img = JSON.parse(data['_body']).img;
-            this.address = this.student[0].CAddress;
-            this.tel = this.student[0].CTel;
+            this.address = this.student[0].CompanyAddress;
+            this.tel = this.student[0].CompanyTels;
           })
       })
   }
 
   approve(){
-    let body = `CName=${this.name.CName}`;
+    let body = `CompanyName=${this.name.CompanyName}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     this.http.post(this.hostname + 'approve/confirm/yes', body, {headers: headers})
@@ -57,7 +57,7 @@ export class AdminConfirmPage {
   }
 
   disapprove(){
-    let body = `CName=${this.name.CName}`;
+    let body = `CompanyName=${this.name.CompanyName}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     this.http.post(this.hostname + 'approve/confirm/no', body, {headers: headers})

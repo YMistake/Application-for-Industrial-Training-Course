@@ -16,8 +16,10 @@ export class CpnAssPage {
   infor: any;
   items:any;
   hostname:string;
+  userdata: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
     this.name = navParams.data;
+    this.userdata = JSON.parse(localStorage.getItem("userdata"));
     console.log("name : "+this.name);
     this.http = http;
     this.http.get("assets/server.json")
@@ -87,10 +89,8 @@ export class CpnAssPage {
 
     if (Opinion == null || Opinion.trim() == "" || Opinion == undefined){
       Opinion = "No Opinion";
-      console.log(Opinion);
-      console.log("Do OP")
     }
-    let body = `id=${this.name.Id}&CName=${this.name.CName}&_1=${_1}&_2=${_2}&_3=${_3}&_4=${_4}&_5=${_5}&_6=${_6}&_7=${_7}&_8=${_8}&_9=${_9}&_10=${_10}&_11=${_11}&_12=${_12}&_13=${_13}&_14=${_14}&_15=${_15}&_16=${_16}&_17=${_17}&_18=${_18}&_19=${_19}&_20=${_20}&_21=${_21}&_22=${_22}&Opinion=${Opinion}`;
+    let body = `id=${this.name.ID}&Assesser=${this.userdata.id}&_1=${_1}&_2=${_2}&_3=${_3}&_4=${_4}&_5=${_5}&_6=${_6}&_7=${_7}&_8=${_8}&_9=${_9}&_10=${_10}&_11=${_11}&_12=${_12}&_13=${_13}&_14=${_14}&_15=${_15}&_16=${_16}&_17=${_17}&_18=${_18}&_19=${_19}&_20=${_20}&_21=${_21}&_22=${_22}&Opinion=${Opinion}`;
     let check = true;
     for (let item of list){
       if (item == "n/a"){
@@ -102,7 +102,7 @@ export class CpnAssPage {
         });
         alert.present();
         break;
-      } 
+      }
     }
     if (check){
       this.http.post(this.hostname + 'student-for-company/company-assesment',body,{headers: headers})

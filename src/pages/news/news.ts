@@ -17,8 +17,8 @@ export class NewsPage {
   time: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.news = navParams.data;
-    this.day = this.news.PostDay.slice(0,10);
-    this.time = this.news.PostDay.slice(11,16);
+    this.day = this.news.PostDate.slice(0,10);
+    this.time = this.news.PostDate.slice(11,16);
   }
 
   ionViewDidLoad() {

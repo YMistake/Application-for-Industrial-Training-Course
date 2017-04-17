@@ -13,21 +13,21 @@ import { StudentInforPage } from '../student-infor/student-infor';
   templateUrl: 'company-student.html'
 })
 export class CompanyStudentPage {
-  companyName: string;
+  data: any;
   si = StudentInforPage;
   items: any;
   hostname: string;
   student: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-    this.companyName=navParams.data;
+    this.data=navParams.data;
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{
         this.items = JSON.parse(data['_body']);//get ip from server.json
         this.hostname = this.items.ip; //put ip into hostname
 
-        let body = `company=${this.companyName}`;
+        let body = `company=${this.data.CompanyName}&year=${this.data.year}`;
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         this.http.post(this.hostname + 'record/company/student',body,{headers: headers})

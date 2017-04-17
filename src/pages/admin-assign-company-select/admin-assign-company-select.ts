@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
+import { AssignmentHistoryPage } from '../assignment-history/assignment-history';
 
 /*
   Generated class for the AdminAssignCompanySelect page.
@@ -51,6 +52,9 @@ export class AdminAssignCompanySelectPage {
     }
   }
 
+  see(){
+    this.navCtrl.push(AssignmentHistoryPage, {id: this.data.ID});
+  }
 
   sendData(){
     let list = this.list;
@@ -62,7 +66,7 @@ export class AdminAssignCompanySelectPage {
       });
       alert.present();
     } else {
-      let body = `id=${this.data.Id}`;
+      let body = `id=${this.data.ID}`;
       let headers = new Headers();
       headers.append('Content-Type', 'application/x-www-form-urlencoded');
       for (let list of this.list){

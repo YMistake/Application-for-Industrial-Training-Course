@@ -4,6 +4,7 @@ import { Http, Headers } from '@angular/http';
 import { LoginPage } from '../login/login';
 import { TabPage } from '../tab/tab';
 import { SignupCompanyPage } from '../signup-company/signup-company';
+import { UpprofilePage } from '../upprofile/upprofile';
 
 @Component({
   selector: 'page-signup',
@@ -15,9 +16,10 @@ export class SignupPage {
   loginPage = LoginPage;
   items:any;
   hostname: string;
+  EmailPattern = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
     this.id = navParams.get("id"); // รับ id มาจากหน้า login
-    console.log("In signup: "+this.id);
     this.firstname = navParams.get("firstname");
     this.lastname = navParams.get("lastname");
     this.email = navParams.get("email");
@@ -49,25 +51,16 @@ export class SignupPage {
     let first = this.firstname;
     let last = this.lastname;
     let email = this.email;
-    let email2 = this.email2;
     let role = this.role;
     let picture = this.picture;
 
     if(
         first == null || first.trim()=="" ||
         last == null || last.trim()=="" ||
-        email == null || email.trim()=="" ||
-        email2 == null || email2.trim()=="") {
+        email == null || email.trim()=="") {
       let alert = this.alertCtrl.create({
         title: 'Signup Failed',
         subTitle: 'please fill all required fields!',
-        buttons: ['OK']
-      });
-      alert.present();
-    }else if (email != email2){
-      let alert = this.alertCtrl.create({
-        title: 'Signup Failed',
-        subTitle: 'E-mail and confirm E-mail does not match!',
         buttons: ['OK']
       });
       alert.present();
@@ -78,6 +71,12 @@ export class SignupPage {
         buttons: ['OK']
       });
       alert.present();
+    } else if(role == "student"){
+      localStorage.setItem("role",role);
+      this.navCtrl.push(UpprofilePage, {id: id, firstname: first, lastname: last, email: email, role: role, picture: picture});
+    } else if(role == "company"){
+      localStorage.setItem("role",role);
+      this.navCtrl.push(SignupCompanyPage, {id: id, firstname: first, lastname: last, email: email, role: role, picture: picture});
     } else {
       let body = `id=${id}&first=${first}&last=${last}&email=${email}&role=${role}&picture=${picture}`;
       let headers = new Headers();
@@ -95,13 +94,10 @@ export class SignupPage {
                 });
                 alert.present();
               } else {
-                if (this.role == "company"){
-                  localStorage.setItem("role",role);
-                  this.navCtrl.push(SignupCompanyPage, {id: id});
-                } else {
+
                   localStorage.setItem("role",role);
                   this.navCtrl.setRoot(TabPage);
-                }
+
               }
           }
         )

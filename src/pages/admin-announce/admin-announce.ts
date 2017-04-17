@@ -69,23 +69,39 @@ export class AdminAnnouncePage {
 
   sendData(){
     console.log(this.student);
-    let body = `news=${this.news}&student=${this.student}&teacher=${this.teacher}&company=${this.company}`;
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    this.http.post(this.hostname + 'news', body, {headers: headers})
-      .subscribe( data => {
-        var report = JSON.parse(data['_body']).report;
-        if(report = 1){
-          this.presentToast();
-          this.news = "";
-        } else {
-          let alert = this.alertCtrl.create({
-            title: 'Submit Failed',
-            subTitle: 'Please check the server or database',
-            buttons: ['OK']
-          });
-          alert.present();
-        }
-      })
+    if(this.news == null || this.news.trim() == ""){
+      let alert = this.alertCtrl.create({
+        subTitle: 'Please insert news.',
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.student == 0 &&
+      this.teacher == 0 &&
+      this.company == 0){
+        let alert = this.alertCtrl.create({
+          subTitle: 'Please select reciever.',
+          buttons: ['OK']
+        });
+        alert.present();
+      } else {
+        let body = `news=${this.news}&student=${this.student}&teacher=${this.teacher}&company=${this.company}`;
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        this.http.post(this.hostname + 'news', body, {headers: headers})
+          .subscribe( data => {
+            var report = JSON.parse(data['_body']).report;
+            if(report = 1){
+              this.presentToast();
+              this.news = "";
+            } else {
+              let alert = this.alertCtrl.create({
+                title: 'Submit Failed',
+                subTitle: 'Please check the server or database',
+                buttons: ['OK']
+              });
+              alert.present();
+            }
+          })
+      }
   }
 }

@@ -1,0 +1,28 @@
+<!--
+  Generated template for the AdminSetyear page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Set Academic Year</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <h4 style="text-align: center">Current Year : {{now}}</h4>
+  <div style="height: 3%"></div>
+  <p>Fill new academic year into textbox</p>
+  <ion-item>
+    <ion-input type="tel" placeholder="Academic Year" [(ngModel)]="year" required minlength="4" maxlength="4" [pattern]="YearPattern"></ion-input>
+  </ion-item>
+  <div style="height: 8%"></div>
+  <button ion-button block (click)="sendData()">Submit</button>
+</ion-content>

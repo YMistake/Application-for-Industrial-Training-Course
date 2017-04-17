@@ -19,7 +19,6 @@ export class AcademicPage {
   items: any;
   company: any;
   hostname: string;
-  cs = CompanyStudentPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     this.year=navParams.data;
@@ -39,6 +38,10 @@ export class AcademicPage {
         },error=>{
             console.log(error);// Error getting the data
         } );
+  }
+
+  sendData(item){
+    this.navCtrl.push(CompanyStudentPage, {CompanyName: item, year: this.year})
   }
 
   ionViewDidLoad() {

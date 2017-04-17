@@ -37,23 +37,6 @@ export class LoginPage {
         } );
   }
 
-  checkLogin(){
-    if (this.Role == "user"){
-      this.login();
-    } else if (this.Role == "admin") {
-      this.navCtrl.push(AdminPinPage);
-    } else {
-      let alert = this.alertCtrl.create({
-        title: 'Warning!!!',
-        subTitle: 'Please select your role.',
-        buttons: ['OK']
-      });
-      alert.present();
-    }
-  }
-
-
-
   googleLogin() {
       return new Promise(function (resolve, reject) {
           var ref = window.open('https://accounts.google.com/o/oauth2/auth?client_id=169572415037-ik488epur22ehatr1dt6nlk5r032g3gq.apps.googleusercontent.com&redirect_uri=http://localhost/callback&scope=https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email&approval_prompt=force&response_type=code&access_type=offline', '_blank', 'location=no');

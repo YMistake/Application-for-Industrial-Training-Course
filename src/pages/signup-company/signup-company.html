@@ -13,11 +13,22 @@
 </ion-header>
 
 
-<ion-content>
-  <h3 style="text-align: center" padding-top>Please select your company</h3>
+<ion-content padding>
+  <h6 style="text-align: center" padding-top>Please insert your position and telephone</h6>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Position</ion-label>
+      <ion-input type="text" [(ngModel)]="Position" required [pattern]="PositionPattern"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Telephone</ion-label>
+      <ion-input type="tel" [(ngModel)]="Tel" required minlength="10" maxlength="10" [pattern]="TelPattern"></ion-input>
+    </ion-item>
+  </ion-list>
+  <h6 style="text-align: center" padding-top>Please select your company</h6>
   <ion-list inset>
-    <button ion-item *ngFor="let item of company" (click)="confirm(item.CName)">
-      {{ item.CName }}
+    <button ion-item *ngFor="let item of company" (click)="confirm(item.CompanyName)">
+      {{ item.CompanyName }}
     </button>
   </ion-list>
 </ion-content>

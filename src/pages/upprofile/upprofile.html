@@ -6,24 +6,22 @@
 -->
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Update Profile</ion-title>
+    <ion-title>Create Profile</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+  <p>Please fill your information in textbox</p>
   <ion-list>
-    <ion-item style="color: #989a9c">
-      <ion-label>Academic Year : </ion-label>
-      <ion-label>{{year}}</ion-label>
+    <ion-item>
+      <ion-label floating>Academic Year</ion-label>
+      <ion-input type="tel" [(ngModel)]="AcademicYear" required minlength="4" maxlength="4"></ion-input>
     </ion-item>
     <div style="height: 20px"></div>
     <ion-item>
       <ion-label>Major</ion-label>
-      <ion-select placeholder="select" [(ngModel)]="Major">
+      <ion-select placeholder="select" [(ngModel)]="Major" required>
         <ion-option value="electronic">Electronic</ion-option>
         <ion-option value="telecom">Telecommunication</ion-option>
         <ion-option value="computer">Computer</ion-option>
@@ -31,64 +29,20 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Student's ID</ion-label>
-      <ion-input type="tel" [(ngModel)]="SId"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Student's Firstname</ion-label>
-      <ion-input type="text" [(ngModel)]="firstname"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Student's Lastname</ion-label>
-      <ion-input type="text" [(ngModel)]="lastname"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Student's E-Mail</ion-label>
-      <ion-input type="text" [(ngModel)]="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Student's Position</ion-label>
-      <ion-input type="text" [(ngModel)]="SPosition"></ion-input>
+      <ion-input type="tel" [(ngModel)]="SId" required minlength="8" maxlength="8"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Student's Tel.</ion-label>
-      <ion-input type="tel" [(ngModel)]="STel"></ion-input>
+      <ion-input type="tel" [(ngModel)]="STel" required minlength="10" maxlength="10" [pattern]="TelPattern"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Student's Facbook</ion-label>
-      <ion-input type="text" [(ngModel)]="SFacebook"></ion-input>
+      <ion-input type="text" [(ngModel)]="SFacebook" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Student's Line</ion-label>
-      <ion-input type="text" [(ngModel)]="SLine"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Company's Name</ion-label>
-      <ion-input type="text" [(ngModel)]="CName"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Company's Address</ion-label>
-      <ion-input type="text" [(ngModel)]="CAddress"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Company's Tel.</ion-label>
-      <ion-input type="tel" [(ngModel)]="CTel"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Supervisor's Name</ion-label>
-      <ion-input type="text" [(ngModel)]="SpvName"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Supervisor's Position</ion-label>
-      <ion-input type="text" [(ngModel)]="SpvPosition"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Supervisor's Tel.</ion-label>
-      <ion-input type="tel" [(ngModel)]="SpvTel"></ion-input>
+      <ion-input type="text" [(ngModel)]="SLine" required></ion-input>
     </ion-item>
   </ion-list>
-
-  <!-- <div style="height: 20px"></div>
-  <img [src] = "temp">
-  <div style="height: 20px"></div> -->
   <button ion-button block (click)="sendData()">Submit</button>
 </ion-content>

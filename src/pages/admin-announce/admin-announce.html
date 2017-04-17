@@ -18,14 +18,14 @@
 
 <ion-content>
   <!--ส่วนประกาศข่าว-->
+  <p padding>Please insert news into News's Textbox</p>
   <ion-item>
-    <ion-label floating>กรุณากรอกข่าวสารที่ต้องการประกาศลงในกล่องข้อความ</ion-label>
-    <ion-textarea elastic [(ngModel)]="news"></ion-textarea>
+    <ion-textarea elastic placeholder="News" [(ngModel)]="news" required></ion-textarea>
   </ion-item>
 
   <!--ส่วนเลือกผู้รับข่าว-->
   <div style="height: 20px"></div>
-  <h6 margin-top padding-left>กรุณาเลือกผู้รับข่าวสาร</h6>
+  <h6 margin-top padding-left>Please select reciever</h6>
   <ion-item>
     <ion-label>Student</ion-label>
     <ion-checkbox color="dark" (ionChange)="studentStatus($event.checked)"></ion-checkbox>

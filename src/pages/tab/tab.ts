@@ -5,7 +5,7 @@ import { LoginPage } from '../login/login';
 import {HomePage} from '../home/home';
 import { SignupPage } from '../signup/signup';
 import { ScnPage } from '../scn/scn';
-import { UpprofilePage } from '../upprofile/upprofile';
+import { Upprofile2Page } from '../upprofile2/upprofile2';
 import { ReviewPage } from '../review/review';
 import { DownloadPage } from '../download/download';
 import { RecordPage } from '../record/record';
@@ -15,6 +15,7 @@ import { CpnStdlistPage } from '../cpn-stdlist/cpn-stdlist';
 import { AdminAnnouncePage } from '../admin-announce/admin-announce';
 import { AdminApprovePage } from '../admin-approve/admin-approve';
 import { AdminAssignCompanyPage } from '../admin-assign-company/admin-assign-company';
+import { AdminSetyearPage } from '../admin-setyear/admin-setyear';
 import { UploadfilePage } from '../uploadfile/uploadfile';
 
 @Component({
@@ -39,7 +40,7 @@ export class TabPage {
     this.pages = [
         { title: 'Home Page', component: HomePage},
         { title: "Send Company's Name", component: ScnPage},
-        { title: 'Update Profile', component: UpprofilePage},
+        { title: 'Edit Profile', component: Upprofile2Page},
         { title: 'Write a Review', component: ReviewPage},
         { title: 'Download', component: DownloadPage},
         { title: 'Industrial Training Record', component: RecordPage},
@@ -63,9 +64,10 @@ export class TabPage {
     else if(this.chkRole == "admin"){
       this.pages = [
         { title: "Home", component: HomePage},
+        { title: "Approve the company", component: AdminApprovePage},
         { title: "Assign Company to Teacher", component: AdminAssignCompanyPage},
         { title: "Announcement", component: AdminAnnouncePage},
-        { title: "Approve the company", component: AdminApprovePage},
+        { title: "Set Academic Year", component: AdminSetyearPage},
         { title: "Upload Documents", component: UploadfilePage },
         { title: "Logout", component: LogoutPage}
       ];

@@ -20,7 +20,7 @@
   <ion-list>
     <ion-item *ngFor="let item of teacher">
       <ion-thumbnail item-left>
-        <img [src]="item.picture">
+        <img [src]="item.Picture">
       </ion-thumbnail>
       <h2>{{item.Firstname}} {{item.Lastname}}</h2>
       <button ion-button clear item-right [navPush]="selectCompany" [navParams]=item>Assign</button>

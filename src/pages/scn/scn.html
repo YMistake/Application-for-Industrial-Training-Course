@@ -21,15 +21,15 @@
   <ion-list>
     <ion-item>
       <ion-label floating>Company's Name</ion-label>
-      <ion-input type="text" [(ngModel)]="CompanyName"></ion-input>
+      <ion-input type="text" [(ngModel)]="CompanyName" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Company's Address</ion-label>
-      <ion-input type="text" [(ngModel)]="CompanyAddress"></ion-input>
+      <ion-input type="text" [(ngModel)]="CompanyAddress" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Company's Tel.</ion-label>
-      <ion-input type="tel" [(ngModel)]="CompanyTel"></ion-input>
+      <ion-input type="tel" [(ngModel)]="CompanyTel" required></ion-input>
     </ion-item>
     <h6 padding>Student List</h6>
     <div [ngSwitch]="show">
@@ -39,8 +39,7 @@
       <div *ngSwitchCase="false">
         <ion-card *ngFor="let item of list; let i = index" (press) = "presentActionSheet(i)">
           <ion-card-content>
-            {{item.id}}<br>
-            {{item.name}}
+            {{item.id}}
           </ion-card-content>
         </ion-card>
       </div>

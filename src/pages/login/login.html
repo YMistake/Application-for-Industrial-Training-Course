@@ -6,15 +6,13 @@
   </div>
 
   <div style="height: 10%"></div>
-  <ion-item>
-    <ion-label>Role</ion-label>
-    <ion-select [(ngModel)]="Role">
-      <ion-option value="user">User</ion-option>
-      <ion-option value="admin">Administrator</ion-option>
-    </ion-select>
-  </ion-item>
-  <div style="height: 10%"></div>
   <div padding-left padding-right>
-    <button ion-button block (click)="checkLogin()">Login</button>
+    <button ion-button block (click)="login()">User Login</button>
+  </div>
+
+  <div style="height: 10%"></div>
+
+  <div padding-left padding-right>
+    <button ion-button block [navPush]="adminpage">Admin Login</button>
   </div>
 </ion-content>

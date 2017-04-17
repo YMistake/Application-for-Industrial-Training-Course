@@ -86,7 +86,7 @@ export class ScnPage {
           });
           alert.present();
         } else {
-          let body = `id=${this.userdata.id}&CompanyName=${this.CompanyName}&CompanyAddress=${this.CompanyAddress}&CompanyTel=${this.CompanyTel}&img=${this.temp}`;
+          let body = `id=${this.userdata.id}&CompanyName=${this.CompanyName}&CompanyAddress=${this.CompanyAddress}&CompanyTels=${this.CompanyTel}&img=${this.temp}`;
           let headers = new Headers();
           headers.append('Content-Type', 'application/x-www-form-urlencoded');
           for (let list of this.list){
@@ -130,17 +130,12 @@ export class ScnPage {
 
  showPrompt() {
    let prompt = this.alertCtrl.create({
-     message: "Enter student's name that want to go to this company",
+     message: "Enter Student's ID that want to go to this company",
      inputs: [
        {
          name: 'id',
          placeholder: "Student ID",
          type: 'tel'
-       },
-       {
-         name: 'name',
-         placeholder: "Student's Name",
-         type: 'text'
        }
      ],
      buttons: [
@@ -154,8 +149,8 @@ export class ScnPage {
          text: 'Save',
          handler: data => {
            console.log('Saved clicked');
-           if(data.id.trim() != "" && data.name.trim() != ""){
-             this.list.push({id: data.id, name: data.name}); //เดี๋ยวต้องดึง Major จากเบสมาใส่ด้วย
+           if(data.id.trim() != ""){
+             this.list.push({id: data.id});
              this.updateValue();
          }
            console.log(this.list);
@@ -255,12 +250,6 @@ export class ScnPage {
           value: this.list[i].id,
           placeholder: "Student ID",
           type: 'tel'
-        },
-        {
-          name: 'name',
-          value: this.list[i].name,
-          placeholder: "Student's Name",
-          type: 'text'
         }
       ],
       buttons: [
@@ -274,8 +263,8 @@ export class ScnPage {
           text: 'Edit',
           handler: data => {
             console.log('Saved clicked');
-            if(data.id.trim() != "" && data.name.trim() != ""){
-              this.list[i] = {id: data.id, name: data.name};
+            if(data.id.trim() != ""){
+              this.list[i] = {id: data.id};
               this.updateValue();
           }
             console.log(this.list);

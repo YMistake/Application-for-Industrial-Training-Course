@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ScnPage } from '../pages/scn/scn';
 import { UpprofilePage } from '../pages/upprofile/upprofile';
+import { Upprofile2Page } from '../pages/upprofile2/upprofile2';
 import { ReviewPage } from '../pages/review/review';
 import { DownloadPage } from '../pages/download/download';
 import { RecordPage } from '../pages/record/record';
@@ -22,11 +23,14 @@ import { CpnStdlistPage } from '../pages/cpn-stdlist/cpn-stdlist';
 import { AdminAnnouncePage } from '../pages/admin-announce/admin-announce';
 import { AdminApprovePage } from '../pages/admin-approve/admin-approve';
 import { AdminConfirmPage } from '../pages/admin-confirm/admin-confirm';
+import { AdminApproveHistoryPage } from '../pages/admin-approve-history/admin-approve-history';
 import { AdminPinPage } from '../pages/admin-pin/admin-pin';
 import { LogoutPage } from '../pages/logout/logout';
 import { SignupCompanyPage } from '../pages/signup-company/signup-company';
 import { AdminAssignCompanyPage } from '../pages/admin-assign-company/admin-assign-company';
 import { AdminAssignCompanySelectPage } from '../pages/admin-assign-company-select/admin-assign-company-select';
+import { AssignmentHistoryPage } from '../pages/assignment-history/assignment-history';
+import { AdminSetyearPage } from '../pages/admin-setyear/admin-setyear';
 import { NewsPage } from '../pages/news/news';
 import { UploadfilePage } from '../pages/uploadfile/uploadfile';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -38,6 +42,7 @@ import { File } from '@ionic-native/file';
     HomePage,
     ScnPage,
     UpprofilePage,
+    Upprofile2Page,
     ReviewPage,
     DownloadPage,
     RecordPage,
@@ -57,10 +62,13 @@ import { File } from '@ionic-native/file';
     AdminAnnouncePage,
     AdminApprovePage,
     AdminConfirmPage,
+    AdminApproveHistoryPage,
     AdminPinPage,
     SignupCompanyPage,
     AdminAssignCompanyPage,
     AdminAssignCompanySelectPage,
+    AssignmentHistoryPage,
+    AdminSetyearPage,
     NewsPage,
     UploadfilePage
   ],
@@ -73,6 +81,7 @@ import { File } from '@ionic-native/file';
     HomePage,
     ScnPage,
     UpprofilePage,
+    Upprofile2Page,
     ReviewPage,
     DownloadPage,
     RecordPage,
@@ -91,10 +100,13 @@ import { File } from '@ionic-native/file';
     AdminAnnouncePage,
     AdminApprovePage,
     AdminConfirmPage,
+    AdminApproveHistoryPage,
     AdminPinPage,
     SignupCompanyPage,
     AdminAssignCompanyPage,
     AdminAssignCompanySelectPage,
+    AssignmentHistoryPage,
+    AdminSetyearPage,
     NewsPage,
     UploadfilePage
   ],

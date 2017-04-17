@@ -23,8 +23,6 @@ export class StudentInforPage {
   information: any;
 
   picture:any;
-  company: string;
-  position: string;
   tel: string;
   facebook: string;
   line: string;
@@ -35,7 +33,7 @@ export class StudentInforPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     this.student=navParams.data;
     console.log(this.student);
-    this.userid = this.student.Id;
+    this.userid = this.student.ID;
     this.firstname = this.student.Firstname;
     this.lastname = this.student.Lastname;
     this.http = http;
@@ -50,13 +48,11 @@ export class StudentInforPage {
         this.http.post(this.hostname + 'record/company/student/information',body,{headers: headers})
           .subscribe(data =>{
           this.information = JSON.parse(data['_body']).data;
-          this.picture = this.information[0].picture;
-          this.company = this.information[0].CName;
-          this.position = this.information[0].SPosition;
-          this.tel = this.information[0].STel;
-          this.facebook = this.information[0].SFacebook;
-          this.line = this.information[0].SLine;
-          this.Work_Environment = this.information[0].Work_Environment;
+          this.picture = this.information[0].Picture;
+          this.tel = this.information[0].Tel;
+          this.facebook = this.information[0].Facebook;
+          this.line = this.information[0].Line;
+          this.Work_Environment = this.information[0].WorkEnvironment;
           this.Travel = this.information[0].Travel;
           this.Bistro = this.information[0].Bistro;
           });

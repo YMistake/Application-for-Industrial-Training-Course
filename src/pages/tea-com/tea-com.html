@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{CName}}</ion-title>
+    <ion-title>{{CompanyName}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -16,14 +16,15 @@
 <ion-content padding-left>
   <p>Address - {{Address}}</p>
   <p>Telephone - {{Telephone}}</p>
-  <p>Supervisor's name - {{SpvName}}</p>
-  <p>Supervisor's position - {{SpvPosition}}</p>
-  <p>Supervisor's telephone - {{SpvTel}}</p>
+  <h6>Supervisor's Information</h6>
+  <p padding-left>Name - {{SpvFirstname}}  {{SpvLastname}}</p>
+  <p padding-left>Position - {{SpvPosition}}</p>
+  <p padding-left>Telephone - {{SpvTel}}</p>
   <h6>Student List</h6>
   <ion-list>
-    <ion-item *ngFor="let item of SData">
+    <ion-item *ngFor="let item of StdData">
       <ion-thumbnail item-left>
-        <img [src]="item.picture">
+        <img [src]="item.Picture">
       </ion-thumbnail>
       <h2>{{item.Firstname}} {{item.Lastname}}</h2>
       <button ion-button clear item-right [navPush]="assessment" [navParams]=item>More</button>

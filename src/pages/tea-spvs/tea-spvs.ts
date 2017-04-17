@@ -18,7 +18,7 @@ export class TeaSpvsPage {
   items: any;
   userdata: any;
   company = TeaComPage;
-  CName: any; //บริษัทที่อยู่ในความดูแลของอาจารย์คนนั้นๆ
+  CompanyName: any; //บริษัทที่อยู่ในความดูแลของอาจารย์คนนั้นๆ
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     this.userdata = JSON.parse(localStorage.getItem("userdata"));
@@ -33,7 +33,7 @@ export class TeaSpvsPage {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         this.http.post(this.hostname + 'teacher_supervision',body,{headers: headers})
           .subscribe(data =>{
-            this.CName = JSON.parse(data['_body']).CName;
+            this.CompanyName = JSON.parse(data['_body']).CompanyName;
           });
         });
 

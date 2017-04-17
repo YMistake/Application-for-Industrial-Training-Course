@@ -34,15 +34,15 @@
     <h4 padding-left padding-top>รีวิวสถานที่ฝึกงาน</h4>
     <ion-item id="work-climate">
       <ion-label floating>บรรยากาศการทำงาน</ion-label>
-      <ion-textarea elastic [(ngModel)]="Work_Environment"></ion-textarea>
+      <ion-textarea elastic [(ngModel)]="Work_Environment" required></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label floating>การเดินทางไปทำงาน</ion-label>
-      <ion-textarea elastic [(ngModel)]="Travel"></ion-textarea>
+      <ion-textarea elastic [(ngModel)]="Travel" required></ion-textarea>
     </ion-item>
     <ion-item>
       <ion-label floating>สถานที่รับประทานอาหาร</ion-label>
-      <ion-textarea elastic [(ngModel)]="Bistro"></ion-textarea>
+      <ion-textarea elastic [(ngModel)]="Bistro" required></ion-textarea>
     </ion-item>
   </ion-list>
   <div padding>

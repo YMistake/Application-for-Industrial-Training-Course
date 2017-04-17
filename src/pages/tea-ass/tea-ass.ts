@@ -15,9 +15,11 @@ export class TeaAssPage {
   SData: any;
   items:any;
   hostname:string;
+  userdata: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController) {
     this.SData = navParams.data;
+    this.userdata = JSON.parse(localStorage.getItem("userdata"));
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{
@@ -87,7 +89,7 @@ export class TeaAssPage {
       console.log(Opinion);
       console.log("Do OP")
     }
-    let body = `id=${this.SData.Id}&CName=${this.SData.CName}&_1=${_1}&_2=${_2}&_3=${_3}&_4=${_4}&_5=${_5}&_6=${_6}&_7=${_7}&_8=${_8}&_9=${_9}&_10=${_10}&_11=${_11}&_12=${_12}&_13=${_13}&_14=${_14}&_15=${_15}&_16=${_16}&_17=${_17}&_18=${_18}&_19=${_19}&_20=${_20}&Opinion=${Opinion}`;
+    let body = `id=${this.SData.ID}&Assesser=${this.userdata.id}&_1=${_1}&_2=${_2}&_3=${_3}&_4=${_4}&_5=${_5}&_6=${_6}&_7=${_7}&_8=${_8}&_9=${_9}&_10=${_10}&_11=${_11}&_12=${_12}&_13=${_13}&_14=${_14}&_15=${_15}&_16=${_16}&_17=${_17}&_18=${_18}&_19=${_19}&_20=${_20}&Opinion=${Opinion}`;
     let check = true;
     for (let item of list){
       if (item == "n/a"){
@@ -122,8 +124,6 @@ export class TeaAssPage {
           }
         });
     }
-
-
   }
 
 }
