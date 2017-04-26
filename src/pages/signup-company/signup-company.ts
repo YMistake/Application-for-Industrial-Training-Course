@@ -75,7 +75,7 @@ export class SignupCompanyPage {
   }
 
   sendData(item){
-    let body = `id=${this.info.id}&Firstname=${this.info.firstname}&Lastname=${this.info.lastname}&Email=${this.info.email}&Role=${this.info.role}&Picture=${this.info.picture}&CompanyName=${item}&Position=${this.Position}&Tel=${this.Tel}`;
+    let body = `id=${this.info.id}&Firstname=${this.info.firstname}&Lastname=${this.info.lastname}&Email=${this.info.email}&Role=${this.info.role}&Picture=${this.info.picture}&CID=${item}&Position=${this.Position}&Tel=${this.Tel}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     this.http.post(this.hostname + 'signup-company2',body, {headers: headers})

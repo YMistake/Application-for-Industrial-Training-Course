@@ -27,7 +27,7 @@ export class CompanyStudentPage {
         this.items = JSON.parse(data['_body']);//get ip from server.json
         this.hostname = this.items.ip; //put ip into hostname
 
-        let body = `company=${this.data.CompanyName}&year=${this.data.year}`;
+        let body = `CID=${this.data.company.CID}&year=${this.data.year}`;
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         this.http.post(this.hostname + 'record/company/student',body,{headers: headers})

@@ -15,6 +15,13 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-label *ngFor="let item of company">{{item.CompanyName}}</ion-label>
+    <h6>Approve</h6>
+      <button ion-item *ngFor="let item of approve" [navPush]="changeApprove" [navParams]=item>
+        {{ item.CompanyName }}
+      </button>
+    <h6>Disapprove</h6>
+      <button ion-item *ngFor="let item of disapprove" [navPush]="changeDisapprove" [navParams]=item>
+        {{ item.CompanyName }}
+      </button>
   </ion-list>
 </ion-content>

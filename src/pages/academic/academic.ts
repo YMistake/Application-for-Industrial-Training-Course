@@ -41,7 +41,7 @@ export class AcademicPage {
   }
 
   sendData(item){
-    this.navCtrl.push(CompanyStudentPage, {CompanyName: item, year: this.year})
+    this.navCtrl.push(CompanyStudentPage, {company: item, year: this.year})
   }
 
   ionViewDidLoad() {

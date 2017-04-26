@@ -20,7 +20,7 @@
   <ion-list>
     <ion-item *ngFor="let item of company">
       <ion-label>{{item.CompanyName}}</ion-label>
-      <ion-checkbox (ionChange)="insertUserToArray(item.CompanyName,$event.checked)"></ion-checkbox>
+      <ion-checkbox (ionChange)="insertUserToArray(item.CID,$event.checked)"></ion-checkbox>
     </ion-item>
   </ion-list>
   <button ion-button block (click)="sendData()">Submit</button>

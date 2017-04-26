@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http,Headers } from '@angular/http';
-
-
+import { AdminChangeStatusPage } from '../admin-change-status/admin-change-status';
+import { AdminChangeStatus2Page } from '../admin-change-status2/admin-change-status2';
 /*
   Generated class for the AdminApproveHistory page.
 
@@ -14,10 +14,12 @@ import { Http,Headers } from '@angular/http';
   templateUrl: 'admin-approve-history.html'
 })
 export class AdminApproveHistoryPage {
-
+  changeApprove = AdminChangeStatusPage;
+  changeDisapprove = AdminChangeStatus2Page;
   items: any;
   hostname: string;
-  company: any;
+  approve: any;
+  disapprove: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
     this.http = http;
@@ -28,7 +30,8 @@ export class AdminApproveHistoryPage {
 
         this.http.get(this.hostname + 'approve_history')
           .subscribe(data => {
-            this.company = JSON.parse(data['_body']).data;
+            this.approve = JSON.parse(data['_body']).approve;
+            this.disapprove = JSON.parse(data['_body']).disapprove;
           })
       })
   }

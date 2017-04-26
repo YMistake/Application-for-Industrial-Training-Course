@@ -16,7 +16,7 @@
 <ion-content>
   <h3 style="text-align: center" padding-top>Company List</h3>
   <ion-list inset>
-    <button ion-item *ngFor="let item of company" (click)="sendData(item.CompanyName)">
+    <button ion-item *ngFor="let item of company" (click)="sendData(item)">
       {{ item.CompanyName }}
     </button>
   </ion-list>

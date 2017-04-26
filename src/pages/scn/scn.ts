@@ -69,11 +69,6 @@ export class ScnPage {
   @Input() CompanyAddress;
   @Input() CompanyTel;
   sendData(){
-    this.loading = this.loadingCtrl.create({
-      content: 'Uploading...',
-    });
-    this.loading.present();
-
     let list = this.list;
     if( list == null || list.length == 0 ||
         this.CompanyName == null || this.CompanyName.trim()=="" ||
@@ -85,7 +80,18 @@ export class ScnPage {
             buttons: ['OK']
           });
           alert.present();
+        } else if (this.temp == "assets/image/Default.png"){
+          let alert = this.alertCtrl.create({
+            title: 'Submit Failed',
+            subTitle: 'please select picture!',
+            buttons: ['OK']
+          });
+          alert.present();
         } else {
+          this.loading = this.loadingCtrl.create({
+            content: 'Uploading...',
+          });
+          this.loading.present();
           let body = `id=${this.userdata.id}&CompanyName=${this.CompanyName}&CompanyAddress=${this.CompanyAddress}&CompanyTels=${this.CompanyTel}&img=${this.temp}`;
           let headers = new Headers();
           headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -98,9 +104,23 @@ export class ScnPage {
                 console.log(data['_body'])
                 var report = JSON.parse(data['_body']).report;
                 console.log(report);
-                if ( report = 1){
+                if ( report == 1){
                   this.loading.dismissAll();
                   this.presentToast('Successfull');
+                  this.CompanyName = "";
+                  this.CompanyAddress = "";
+                  this.CompanyTel = "";
+                  this.list=[];
+                  this.updateValue();
+                  this.temp = "assets/image/Default.png";
+                } else {
+                  let alert = this.alertCtrl.create({
+                    title: 'Submit Failed',
+                    subTitle: 'Some student ID does not have in the system. Please regist first.',
+                    buttons: ['OK']
+                  });
+                  alert.present();
+                  this.loading.dismissAll();
                 }
               },
               error =>  {
@@ -109,12 +129,6 @@ export class ScnPage {
                 this.presentToast('Error while uploading file.');
               }
             )
-            this.CompanyName = "";
-            this.CompanyAddress = "";
-            this.CompanyTel = "";
-            this.list=[];
-            this.updateValue();
-            this.temp = "assets/image/Default.png";
         }
   }
 

@@ -18,8 +18,11 @@ export class AdminConfirmPage {
   name: any;
   student: any;
   address: any;
+  SFirstname: any;
+  SLastname: any;
   tel: any;
   img: any;
+  list = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public http: Http) {
     this.name = navParams.data;
     this.http.get("assets/server.json")
@@ -27,7 +30,7 @@ export class AdminConfirmPage {
         this.items = JSON.parse(data['_body']);//get ip from server.json
         this.hostname = this.items.ip; //put ip into hostname
 
-        let body = `CompanyName=${this.name.CompanyName}`;
+        let body = `CID=${this.name.CID}`;
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         this.http.post(this.hostname + 'approve/confirm', body, {headers: headers})
@@ -36,12 +39,17 @@ export class AdminConfirmPage {
             this.img = JSON.parse(data['_body']).img;
             this.address = this.student[0].CompanyAddress;
             this.tel = this.student[0].CompanyTels;
+            this.SFirstname = JSON.parse(data['_body']).SFirstname;
+            this.SLastname = JSON.parse(data['_body']).SLastname;
+            for (let list of this.student){
+              this.list.push(list.SID);
+            }
           })
       })
   }
 
   approve(){
-    let body = `CompanyName=${this.name.CompanyName}`;
+    let body = `CID=${this.name.CID}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     this.http.post(this.hostname + 'approve/confirm/yes', body, {headers: headers})
@@ -57,9 +65,12 @@ export class AdminConfirmPage {
   }
 
   disapprove(){
-    let body = `CompanyName=${this.name.CompanyName}`;
+    let body = `CID=${this.name.CID}`;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    for (let list of this.list){
+      body += `&list[]=${list}`;
+    }
     this.http.post(this.hostname + 'approve/confirm/no', body, {headers: headers})
       .subscribe(data => {
         var report = JSON.parse(data['_body']).report;

@@ -24,6 +24,8 @@ import { AdminAnnouncePage } from '../pages/admin-announce/admin-announce';
 import { AdminApprovePage } from '../pages/admin-approve/admin-approve';
 import { AdminConfirmPage } from '../pages/admin-confirm/admin-confirm';
 import { AdminApproveHistoryPage } from '../pages/admin-approve-history/admin-approve-history';
+import { AdminChangeStatusPage } from '../pages/admin-change-status/admin-change-status';
+import { AdminChangeStatus2Page } from '../pages/admin-change-status2/admin-change-status2';
 import { AdminPinPage } from '../pages/admin-pin/admin-pin';
 import { LogoutPage } from '../pages/logout/logout';
 import { SignupCompanyPage } from '../pages/signup-company/signup-company';
@@ -63,6 +65,8 @@ import { File } from '@ionic-native/file';
     AdminApprovePage,
     AdminConfirmPage,
     AdminApproveHistoryPage,
+    AdminChangeStatusPage,
+    AdminChangeStatus2Page,
     AdminPinPage,
     SignupCompanyPage,
     AdminAssignCompanyPage,
@@ -105,6 +109,8 @@ import { File } from '@ionic-native/file';
     SignupCompanyPage,
     AdminAssignCompanyPage,
     AdminAssignCompanySelectPage,
+    AdminChangeStatusPage,
+    AdminChangeStatus2Page,
     AssignmentHistoryPage,
     AdminSetyearPage,
     NewsPage,

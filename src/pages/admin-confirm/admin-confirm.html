@@ -14,10 +14,10 @@
 
 
 <ion-content padding>
-  <!--ใส่รูป-->
   <img [src]="img">
   <p><b>Address</b> - {{address}}</p>
   <p><b>Tel</b> - {{tel}}</p>
+  <p><b>Submitter</b> - {{SFirstname}} {{SLastname}}</p>
   <h6>Student Lists</h6>
   <p padding-left *ngFor="let item of student">{{item.SID}}&nbsp;&nbsp;{{item.Firstname}}&nbsp;&nbsp;{{item.Lastname}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.Major}}</p>
 

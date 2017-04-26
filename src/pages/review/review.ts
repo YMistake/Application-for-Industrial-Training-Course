@@ -34,9 +34,9 @@ export class ReviewPage {
     console.log("Id From ReviewPage : "+this.userdata.id);
   }
 
-  presentToast() {
+  presentToast(text) {
   let toast = this.toastCtrl.create({
-    message: 'Successfull',
+    message: text,
     duration: 3000,
     position: 'bottom'
   });
@@ -69,13 +69,22 @@ export class ReviewPage {
       this.http.post(this.hostname + 'review', body, {headers: headers})
         .subscribe(
           data => {
-
+            var report = JSON.parse(data['_body']).report;
+            if (report == 1){
+              this.presentToast("Successfull");
+              this.Work_Environment = "";
+              this.Travel = "";
+              this.Bistro = "";
+            } else {
+              let alert = this.alertCtrl.create({
+                title: 'Submit Failed',
+                subTitle: 'Please contact admin',
+                buttons: ['OK']
+              });
+              alert.present();
+            }
           }
         )
-      this.presentToast();
-      this.Work_Environment = "";
-      this.Travel = "";
-      this.Bistro = "";
     }
 
   }

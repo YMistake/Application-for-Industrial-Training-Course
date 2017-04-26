@@ -39,8 +39,8 @@ export class TabPage {
     if(this.chkRole == "student"){
     this.pages = [
         { title: 'Home Page', component: HomePage},
-        { title: "Send Company's Name", component: ScnPage},
         { title: 'Edit Profile', component: Upprofile2Page},
+        { title: "Send Company's Name", component: ScnPage},
         { title: 'Write a Review', component: ReviewPage},
         { title: 'Download', component: DownloadPage},
         { title: 'Industrial Training Record', component: RecordPage},
@@ -64,10 +64,10 @@ export class TabPage {
     else if(this.chkRole == "admin"){
       this.pages = [
         { title: "Home", component: HomePage},
+        { title: "Set Academic Year", component: AdminSetyearPage},
         { title: "Approve the company", component: AdminApprovePage},
         { title: "Assign Company to Teacher", component: AdminAssignCompanyPage},
         { title: "Announcement", component: AdminAnnouncePage},
-        { title: "Set Academic Year", component: AdminSetyearPage},
         { title: "Upload Documents", component: UploadfilePage },
         { title: "Logout", component: LogoutPage}
       ];

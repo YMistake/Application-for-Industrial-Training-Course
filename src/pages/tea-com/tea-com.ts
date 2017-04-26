@@ -15,7 +15,7 @@ import { TeaAssPage } from '../tea-ass/tea-ass';
 export class TeaComPage {
   items: any;
   hostname: string;
-  CompanyName: any;
+  company: any;
 
   CData: any;
   Address: any;
@@ -30,14 +30,14 @@ export class TeaComPage {
 
   assessment = TeaAssPage;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
-    this.CompanyName = navParams.data;
+    this.company = navParams.data;
     this.http = http;
     this.http.get("assets/server.json")
         .subscribe(data =>{
         this.items = JSON.parse(data['_body']);//get ip from server.json
         this.hostname = this.items.ip; //put ip into hostname
 
-        let body = `CompanyName=${this.CompanyName}`;
+        let body = `CID=${this.company.CID}`;
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         this.http.post(this.hostname + 'teacher_supervision/company',body,{headers: headers})
